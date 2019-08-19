@@ -1,0 +1,13 @@
+%syntax-version=1.0.0
+%project=tipsters
+%uri=https://github.com/dime8/tipsters/
+
+appschema 2019-07-15T12:03:40Z Dimitrija Tomic <dimitrijadimetomic@gmail.com> # Add schema for tipsters objects
+users [appschema] 2019-07-15T14:26:24Z Dimitrija Tomic <dimitrijadimetomic@gmail.com> # Creates table users.
+teams [appschema] 2019-07-16T11:43:28Z Dimitrija Tomic <dimitrijadimetomic@gmail.com> # Creates table teams.
+matches [appschema teams] 2019-07-16T12:19:13Z Dimitrija Tomic <dimitrijadimetomic@gmail.com> # Creates table matches.
+predictions [appschema users matches] 2019-07-16T13:40:24Z Dimitrija Tomic <dimitrijadimetomic@gmail.com> # Creates table predictions.
+@v1.0.0-dev1 2019-08-01T13:08:59Z dimitrijadimetomic@gmail.com <dimitrijadimetomic@gmail.com> # Tag v1.0.0-dev1.
+
+invites [appschema users matches] 2019-08-01T13:33:27Z dimitrijadimetomic@gmail.com <dimitrijadimetomic@gmail.com> # Adds table for invites.
+@v1.0.0-dev2 2019-08-01T14:34:19Z dimitrijadimetomic@gmail.com <dimitrijadimetomic@gmail.com> # Tag v1.0.0-dev2.
