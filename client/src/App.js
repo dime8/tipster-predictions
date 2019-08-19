@@ -12,7 +12,9 @@ import Navbar from "./components/navbar/Navbar";
 import About from "./components/pages/About";
 import NotFound from "./components/pages/NotFound";
 import CardMedia from "@material-ui/core/CardMedia";
-import Login from "./components/login/Login";
+import Typography from "@material-ui/core/Typography";
+
+// Login from "./components/login/Login";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -37,6 +39,10 @@ class App extends React.Component {
     localStorage.setItem("currentUserId", currentUserId);
     this.setState({ currentUserId });
   };
+  logout = () => {
+    localStorage.setItem("currentUserId", "");
+    this.setState({ currentUserId: "" });
+  };
 
   render() {
     let imageUrl = "";
@@ -50,7 +56,11 @@ class App extends React.Component {
     return (
       <Router>
         <div className="App">
-          <Navbar login={this.login} />
+          <Navbar
+            login={this.login}
+            logout={this.logout}
+            currentUserId={this.state.currentUserId}
+          />
           {this.state.currentUserId !== "" ? (
             <div className="container">
               <Switch>
@@ -70,7 +80,7 @@ class App extends React.Component {
                     />
                   )}
                 />
-                <Route exact path="/login" component={Login} />
+
                 <Route exact path="/about" component={About} />
                 <Route
                   exact
@@ -88,13 +98,16 @@ class App extends React.Component {
             </div>
           ) : (
             <div>
-              {/* <CardMedia
+              <Typography variant="body2" color="textSecondary" component="p">
+                <span className="LogIn">Please login!</span>
+              </Typography>
+              <CardMedia
                 component="img"
                 alt="sport"
                 height="400"
                 image={imageUrl}
                 title="sport"
-              /> */}
+              />
             </div>
           )}
         </div>

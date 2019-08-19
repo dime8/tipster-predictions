@@ -2,6 +2,6 @@
 
 BEGIN;
 
--- XXX Add DDLs here.
+DROP FUNCTION tipsters.login( text, text);
 
 COMMIT;

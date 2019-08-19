@@ -108,7 +108,7 @@ class Matches extends Component {
 }
 
 Matches.propTypes = {
-  matches: PropTypes.array.isRequired
+  joinedMatches: PropTypes.array.isRequired
 };
 
 export default createFragmentContainer(Matches, {

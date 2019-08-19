@@ -7,9 +7,31 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import CardMedia from "@material-ui/core/CardMedia";
+import LoginMutation from "../../mutations/LoginMutation";
+
 import "./Login.css";
 
 class Login extends React.Component {
+  state = {
+    username: "",
+    password: ""
+  };
+  updateField = (fieldName, inputValue) => {
+    console.log(fieldName, inputValue);
+    this.setState({ [fieldName]: inputValue });
+  };
+  handleLogin = (username, password) => {
+    LoginMutation(username, password, (res, err) => {
+      console.log("printanje greska", err, "rezultat ", res);
+      if (res.login) {
+        this.props.login(res.login.uuid);
+        this.props.handleClose();
+        this.setState({ username: "", password: "" });
+      } else {
+        alert("Data not correct: " + err[0].message);
+      }
+    });
+  };
   render() {
     const { open, handleClose } = this.props;
     let imageUrl = "";
@@ -42,6 +64,8 @@ class Login extends React.Component {
               label="Username"
               type="text"
               fullWidth
+              value={this.state.username}
+              onChange={e => this.updateField("username", e.target.value)}
             />
             <TextField
               margin="dense"
@@ -49,10 +73,17 @@ class Login extends React.Component {
               label="Password"
               type="password"
               fullWidth
+              value={this.state.password}
+              onChange={e => this.updateField("password", e.target.value)}
             />
           </DialogContent>
           <DialogActions className="login">
-            <Button className="buttons" onClick={handleClose}>
+            <Button
+              className="buttons"
+              onClick={() =>
+                this.handleLogin(this.state.username, this.state.password)
+              }
+            >
               Login
             </Button>
             <Button onClick={handleClose}>Register</Button>
