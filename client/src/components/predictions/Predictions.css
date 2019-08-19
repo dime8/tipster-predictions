@@ -1,0 +1,19 @@
+.predictionUser {
+  color: black;
+}
+.predictionMatch {
+  color: black;
+  text-align: center;
+}
+.predictionScore {
+  color: darkslategrey;
+}
+.Content {
+  background-color: rgba(185, 179, 179, 0.445);
+}
+#scroll-dialog-title,
+.Actions {
+  color: black;
+  background-color: gray;
+  text-align: center;
+}

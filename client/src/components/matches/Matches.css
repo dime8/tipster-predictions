@@ -1,0 +1,62 @@
+.matchHeader {
+  color: gold;
+}
+.flexContainer {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.matchCard {
+  background-color: gray;
+}
+.matchContent {
+  background-color: white;
+  color: gray;
+  font-size: 10;
+  line-height: 2rem;
+}
+.matchBy,
+.User {
+  background-color: gray;
+  color: rgb(0, 0, 0);
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  font-size: 20px;
+  line-height: 2rem;
+}
+.matchesList {
+  color: gray;
+}
+
+.card {
+  margin: 10px;
+  flex: 0 1 calc(33.33% - 20px);
+}
+.media {
+  height: 0;
+  padding-top: 56.25%; /*16:9*/
+}
+.MuiCardMedia-media {
+  object-fit: contain !important;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+.formSelect,
+.textField {
+  flex: 1;
+}
+.formControl {
+  min-width: 50px;
+}
+.imageSport {
+  padding: 10px;
+}
+.matchCardButtons {
+  color: #000;
+}
