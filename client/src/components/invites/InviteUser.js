@@ -36,8 +36,12 @@ class InviteUser extends Component {
 
     const matchid = this.state.match.id;
     InviteUserMutation(userid, matchid, res => {
-      console.log("Mutation completed!");
-      alert(`Invite user ${userid} for ${matchid}!`);
+      console.log("Mutation completed!", res);
+      alert(`Invited user id :${userid}. Match id: ${matchid}.
+      Accept invite using this code(invite id): ${res.inviteUser.uuid}`);
+      console.log(
+        `Accept invite using this code(invite id): ${res.inviteUser.uuid}`
+      );
       this.props.handleClose();
     });
   };

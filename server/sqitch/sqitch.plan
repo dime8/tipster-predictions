@@ -16,3 +16,4 @@ invite_user [invites appschema] 2019-08-14T14:26:19Z dimitrijadimetomic@gmail.co
 joined_matches [users matches appschema] 2019-08-15T11:49:25Z dimitrijadimetomic@gmail.com <dimitrijadimetomic@gmail.com> # Creates table for joined matches.
 accept_invite [invites appschema] 2019-08-15T13:09:32Z dimitrijadimetomic@gmail.com <dimitrijadimetomic@gmail.com> # Creates a function to invite a user.
 login [users appschema] 2019-08-19T09:58:58Z dimitrijadimetomic@gmail.com <dimitrijadimetomic@gmail.com> # Creates a function for login.
+register_user [users appschema] 2019-08-20T08:01:23Z dimitrijadimetomic@gmail.com <dimitrijadimetomic@gmail.com> # Creates a function to register a user.

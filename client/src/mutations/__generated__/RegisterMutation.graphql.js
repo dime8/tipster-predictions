@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash eb74c991ff758e2bb994f6482fcb459f
+ * @relayHash ca15fdb2afe2d95ce37d66740e9037ca
  */
 
 /* eslint-disable */
@@ -9,31 +9,31 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type LoginInput = {|
+export type RegisterUserInput = {|
   clientMutationId?: ?string,
   _username?: ?string,
   _password?: ?string,
 |};
-export type LoginMutationVariables = {|
-  input: LoginInput
+export type RegisterMutationVariables = {|
+  input: RegisterUserInput
 |};
-export type LoginMutationResponse = {|
-  +login: ?{|
+export type RegisterMutationResponse = {|
+  +registerUser: ?{|
     +uuid: ?any
   |}
 |};
-export type LoginMutation = {|
-  variables: LoginMutationVariables,
-  response: LoginMutationResponse,
+export type RegisterMutation = {|
+  variables: RegisterMutationVariables,
+  response: RegisterMutationResponse,
 |};
 */
 
 
 /*
-mutation LoginMutation(
-  $input: LoginInput!
+mutation RegisterMutation(
+  $input: RegisterUserInput!
 ) {
-  login(input: $input) {
+  registerUser(input: $input) {
     uuid
   }
 }
@@ -44,7 +44,7 @@ var v0 = [
   {
     "kind": "LocalArgument",
     "name": "input",
-    "type": "LoginInput!",
+    "type": "RegisterUserInput!",
     "defaultValue": null
   }
 ],
@@ -52,7 +52,7 @@ v1 = [
   {
     "kind": "LinkedField",
     "alias": null,
-    "name": "login",
+    "name": "registerUser",
     "storageKey": null,
     "args": [
       {
@@ -61,7 +61,7 @@ v1 = [
         "variableName": "input"
       }
     ],
-    "concreteType": "LoginPayload",
+    "concreteType": "RegisterUserPayload",
     "plural": false,
     "selections": [
       {
@@ -78,7 +78,7 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "LoginMutation",
+    "name": "RegisterMutation",
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": (v0/*: any*/),
@@ -86,19 +86,19 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "LoginMutation",
+    "name": "RegisterMutation",
     "argumentDefinitions": (v0/*: any*/),
     "selections": (v1/*: any*/)
   },
   "params": {
     "operationKind": "mutation",
-    "name": "LoginMutation",
+    "name": "RegisterMutation",
     "id": null,
-    "text": "mutation LoginMutation(\n  $input: LoginInput!\n) {\n  login(input: $input) {\n    uuid\n  }\n}\n",
+    "text": "mutation RegisterMutation(\n  $input: RegisterUserInput!\n) {\n  registerUser(input: $input) {\n    uuid\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '0e94a8396f11346a58ae2af62e42f3a7';
+(node/*: any*/).hash = '7dd1702845522286d0e9206fab71e47a';
 module.exports = node;

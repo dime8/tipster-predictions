@@ -4,3 +4,8 @@
 .buttons {
   justify-content: center !important;
 }
+.switchButton {
+  font-size: 10px !important;
+  color: blue !important;
+  text-decoration: underline !important;
+}
