@@ -20,28 +20,32 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import CreateMatchesPage from "./components/matches/CreateMatchesPage";
 import AcceptInvite from "./components/invites/AcceptInvite";
+import AuthHelperMethods from "./components/login/AuthHelperMethods";
 
-import history from "./history";
+import withAuth from "./components/login/withAuth";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUserId: localStorage.getItem("currentUserId") || ""
+      currentUserId: localStorage.getItem("id_token") || ""
     };
   }
+  /* Create a new instance of the 'AuthHelperMethods' component at the top of the class*/
+  Auth = new AuthHelperMethods();
+  /* Add the following into _handleLogout*/
+  _handleLogout = () => {
+    this.Auth.logout();
+    this.props.history.replace("/login");
+  };
   componentDidMount() {
-    const currentUserId = localStorage.getItem("currentUserId");
+    const currentUserId = localStorage.getItem("id_token");
     this.setState({ currentUserId });
   }
 
   login = currentUserId => {
-    localStorage.setItem("currentUserId", currentUserId);
+    localStorage.setItem("id_token", currentUserId);
     this.setState({ currentUserId });
-  };
-  logout = () => {
-    localStorage.setItem("currentUserId", "");
-    this.setState({ currentUserId: "" });
   };
 
   render() {
@@ -58,7 +62,7 @@ class App extends React.Component {
         <div className="App">
           <Navbar
             login={this.login}
-            logout={this.logout}
+            logout={this._handleLogout}
             currentUserId={this.state.currentUserId}
           />
           {this.state.currentUserId !== "" ? (
@@ -115,4 +119,4 @@ class App extends React.Component {
     );
   }
 }
-export default App;
+export default withAuth(App);

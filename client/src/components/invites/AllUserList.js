@@ -14,7 +14,7 @@ export default class AllUserList extends Component {
     super(props);
 
     this.state = {
-      userid: localStorage.getItem("currentUserId") || ""
+      userid: localStorage.getItem("id_token") || ""
     };
   }
   render() {

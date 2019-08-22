@@ -5,7 +5,6 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import Login from "../login/LoginDialog";
 
 export default class Navbar extends Component {
   state = {
@@ -29,11 +28,6 @@ export default class Navbar extends Component {
     console.log("loged user ---->>> ", currentUserId);
     return (
       <AppBar position="static">
-        <Login
-          open={this.state.open}
-          handleClose={this.handleClose}
-          login={this.props.login}
-        />
         <Toolbar className="Tbar">
           <Link to="/" className="link">
             Home
@@ -47,15 +41,9 @@ export default class Navbar extends Component {
           <Link to="/about" className="link">
             About
           </Link>
-          {currentUserId !== "" ? (
-            <Button color="inherit" onClick={this.props.logout}>
-              Logout
-            </Button>
-          ) : (
-            <Button color="inherit" onClick={this.handleClickOpen}>
-              Login
-            </Button>
-          )}
+          <Button color="inherit" onClick={this.props.logout}>
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
     );

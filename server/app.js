@@ -20,9 +20,18 @@ const schema = require("./schema/schema");
 const { GraphQLSchema } = graphql;
 const PostGraphileConnectionFilterPlugin = require("postgraphile-plugin-connection-filter");
 
+//const jwt = require("express-jwt");
+
 var app = express();
 
+// authentication middleware
+// const authMiddleware = jwt({
+//   secret: "somesuperdupersecret"
+// });
+
 app.use(cors());
+
+//app.use(authMiddleware);
 
 app.use(
   postgraphile("postgres://admin:@localhost:5432/tipsters", "tipsters", {

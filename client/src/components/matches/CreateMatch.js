@@ -12,7 +12,6 @@ import TextField from "@material-ui/core/TextField";
 
 import CreateMatchMutation from "../../mutations/CreateMatchMutation";
 import JoinedMatchesMutation from "../../mutations/JoinedMatchesMutation";
-import history from "../../history";
 
 class CreateMatch extends Component {
   constructor(props) {
@@ -23,7 +22,7 @@ class CreateMatch extends Component {
       league: "",
       hostid: "",
       guestid: "",
-      userid: localStorage.getItem("currentUserId"),
+      userid: localStorage.getItem("id_token"),
       teams: props.teams,
       redirect: false
     };
@@ -70,7 +69,7 @@ class CreateMatch extends Component {
             league: "",
             hostid: "",
             guestid: "",
-            userid: localStorage.getItem("currentUserId")
+            userid: localStorage.getItem("id_token")
           });
         }
       }

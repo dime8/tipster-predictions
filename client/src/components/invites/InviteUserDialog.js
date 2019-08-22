@@ -16,7 +16,7 @@ class InviteUserDialog extends React.Component {
     super(props);
     this.state = {
       id: "",
-      userid: localStorage.getItem("currentUserId") || ""
+      userid: localStorage.getItem("id_token") || ""
     };
   }
   handleChange = event => {

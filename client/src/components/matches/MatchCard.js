@@ -69,7 +69,7 @@ class MatchCard extends Component {
           >
             Add prediction
           </Button>
-          {match.userByUserid.id === localStorage.getItem("currentUserId") ? (
+          {match.userByUserid.id === localStorage.getItem("id_token") ? (
             <Button
               className="matchCardButtons"
               size="small"
@@ -82,7 +82,7 @@ class MatchCard extends Component {
               Delete match
             </Button>
           )}
-          {match.userByUserid.id === localStorage.getItem("currentUserId") ? (
+          {match.userByUserid.id === localStorage.getItem("id_token") ? (
             <Button
               className="matchCardButtons"
               size="small"

@@ -45,8 +45,7 @@ class PredictionCard extends Component {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          {prediction.userByUserid.id ===
-          localStorage.getItem("currentUserId") ? (
+          {prediction.userByUserid.id === localStorage.getItem("id_token") ? (
             <Button
               size="small"
               color="primary"

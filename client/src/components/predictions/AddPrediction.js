@@ -15,7 +15,7 @@ class AddPrediction extends Component {
   componentDidMount() {
     this.setState({
       match: this.props.match,
-      userid: localStorage.getItem("currentUserId")
+      userid: localStorage.getItem("id_token")
     });
   }
   render() {

@@ -4,7 +4,11 @@ import environment from "../Environment";
 const mutation = graphql`
   mutation LoginMutation($input: LoginInput!) {
     login(input: $input) {
-      uuid
+      jwtToken {
+        name
+        userId
+        exp
+      }
     }
   }
 `;
