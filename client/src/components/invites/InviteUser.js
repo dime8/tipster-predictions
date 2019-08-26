@@ -26,6 +26,7 @@ class InviteUser extends Component {
           match={this.props.match}
           _inviteUser={this._inviteUser}
           handleClose={this.props.handleClose}
+          currentUser={this.props.currentUser}
         />
       </div>
     );

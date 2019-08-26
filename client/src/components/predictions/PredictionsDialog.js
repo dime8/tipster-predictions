@@ -36,6 +36,7 @@ class PredictionsDialog extends React.Component {
                   key={prediction.id}
                   prediction={prediction}
                   updateMatch={this.props.updateMatch}
+                  currentUser={this.props.currentUser}
                 />
               ))
             ) : (

@@ -27,7 +27,7 @@ class PredictionCard extends Component {
   };
 
   render() {
-    const { prediction } = this.props;
+    const { prediction, currentUser } = this.props;
     console.log(this.props);
 
     return (
@@ -45,7 +45,7 @@ class PredictionCard extends Component {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          {prediction.userByUserid.id === localStorage.getItem("id_token") ? (
+          {prediction.userByUserid.id === currentUser.userid ? (
             <Button
               size="small"
               color="primary"

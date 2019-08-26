@@ -24,8 +24,8 @@ export default class Navbar extends Component {
   };
 
   render() {
-    const { currentUserId } = this.props;
-    console.log("loged user ---->>> ", currentUserId);
+    //   const { currentUser } = this.props;
+    //   console.log("loged user ---->>> ", currentUser);
     return (
       <AppBar position="static">
         <Toolbar className="Tbar">

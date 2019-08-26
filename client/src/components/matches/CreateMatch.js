@@ -12,6 +12,7 @@ import TextField from "@material-ui/core/TextField";
 
 import CreateMatchMutation from "../../mutations/CreateMatchMutation";
 import JoinedMatchesMutation from "../../mutations/JoinedMatchesMutation";
+import AuthHelperMethods from "../login/AuthHelperMethods";
 
 class CreateMatch extends Component {
   constructor(props) {
@@ -22,10 +23,16 @@ class CreateMatch extends Component {
       league: "",
       hostid: "",
       guestid: "",
-      userid: localStorage.getItem("id_token"),
+      userid: "",
       teams: props.teams,
       redirect: false
     };
+  }
+
+  Auth = new AuthHelperMethods();
+  componentDidMount() {
+    const user = this.Auth.getConfirm();
+    this.setState({ userid: user.userid, curentUser: user });
   }
 
   handleChange = event => {
@@ -68,8 +75,7 @@ class CreateMatch extends Component {
             type: "",
             league: "",
             hostid: "",
-            guestid: "",
-            userid: localStorage.getItem("id_token")
+            guestid: ""
           });
         }
       }

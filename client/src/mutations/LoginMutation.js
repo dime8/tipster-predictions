@@ -5,9 +5,10 @@ const mutation = graphql`
   mutation LoginMutation($input: LoginInput!) {
     login(input: $input) {
       jwtToken {
-        name
-        userId
+        username
         exp
+        role
+        userid
       }
     }
   }
@@ -31,7 +32,7 @@ export default (_username, _password, callback) =>
       },
       onError: err => {
         callback(err);
-        alert("Username or password is invalid!", err);
+        alert("Username or password is invalid!!!!!!!", err);
       }
     });
   });

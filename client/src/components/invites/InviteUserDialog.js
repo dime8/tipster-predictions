@@ -16,7 +16,7 @@ class InviteUserDialog extends React.Component {
     super(props);
     this.state = {
       id: "",
-      userid: localStorage.getItem("id_token") || ""
+      userid: props.currentUser.userid || ""
     };
   }
   handleChange = event => {
@@ -29,7 +29,6 @@ class InviteUserDialog extends React.Component {
   };
   render() {
     const { handleClose, _inviteUser } = this.props;
-    // console.log(">>>>>>> prediction dialog: mathes", predictions);
 
     return (
       <div>

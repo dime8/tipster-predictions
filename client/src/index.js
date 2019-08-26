@@ -10,9 +10,9 @@ import Signup from "./signup";
 ReactDOM.render(
   <Router>
     <div>
-      <Route exact path="/" component={App} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={Signup} />
+      <Route component={App} />
     </div>
   </Router>,
   document.getElementById("root")

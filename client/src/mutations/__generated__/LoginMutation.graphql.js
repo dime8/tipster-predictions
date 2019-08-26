@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash eb74c991ff758e2bb994f6482fcb459f
+ * @relayHash 1711a1858051521c69e9a84b5131e44c
  */
 
 /* eslint-disable */
@@ -19,7 +19,12 @@ export type LoginMutationVariables = {|
 |};
 export type LoginMutationResponse = {|
   +login: ?{|
-    +uuid: ?any
+    +jwtToken: ?{|
+      +username: ?string,
+      +exp: ?number,
+      +role: ?string,
+      +userid: ?any,
+    |}
   |}
 |};
 export type LoginMutation = {|
@@ -34,7 +39,12 @@ mutation LoginMutation(
   $input: LoginInput!
 ) {
   login(input: $input) {
-    uuid
+    jwtToken {
+      username
+      exp
+      role
+      userid
+    }
   }
 }
 */
@@ -65,11 +75,43 @@ v1 = [
     "plural": false,
     "selections": [
       {
-        "kind": "ScalarField",
+        "kind": "LinkedField",
         "alias": null,
-        "name": "uuid",
+        "name": "jwtToken",
+        "storageKey": null,
         "args": null,
-        "storageKey": null
+        "concreteType": "JwtToken",
+        "plural": false,
+        "selections": [
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "username",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "exp",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "role",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "userid",
+            "args": null,
+            "storageKey": null
+          }
+        ]
       }
     ]
   }
@@ -94,11 +136,11 @@ return {
     "operationKind": "mutation",
     "name": "LoginMutation",
     "id": null,
-    "text": "mutation LoginMutation(\n  $input: LoginInput!\n) {\n  login(input: $input) {\n    uuid\n  }\n}\n",
+    "text": "mutation LoginMutation(\n  $input: LoginInput!\n) {\n  login(input: $input) {\n    jwtToken {\n      username\n      exp\n      role\n      userid\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '0e94a8396f11346a58ae2af62e42f3a7';
+(node/*: any*/).hash = '34a026eb3ed668d7cc55b52586545946';
 module.exports = node;

@@ -20,14 +20,17 @@ const schema = require("./schema/schema");
 const { GraphQLSchema } = graphql;
 const PostGraphileConnectionFilterPlugin = require("postgraphile-plugin-connection-filter");
 
-//const jwt = require("express-jwt");
+const jwt = require("express-jwt");
+//import * as jsonwebtoken from "jsonwebtoken";
 
 var app = express();
 
 // authentication middleware
-// const authMiddleware = jwt({
-//   secret: "somesuperdupersecret"
-// });
+const authMiddleware = jwt({
+  secret: "somesuperdupersecret"
+});
+
+console.log("---->>>>Tooookeeen:", authMiddleware.unless);
 
 app.use(cors());
 
@@ -74,10 +77,13 @@ var allowCrossDomain = function(req, res, next) {
 app.use(allowCrossDomain);
 app.use(
   "/graphql",
-  graphqlHTTP({
+  graphqlHTTP((request, response, graphQLParams) => ({
     schema,
-    graphiql: true
-  })
+    graphiql: true,
+    context: {
+      user: req.user
+    }
+  }))
 );
 
 //use routes --DT

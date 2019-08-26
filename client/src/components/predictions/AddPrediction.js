@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import CreatePredictionMutation from "../../mutations/CreatePredictionMutation";
 import AddDialog from "./AddDialog";
+import AuthHelperMethods from "../login/AuthHelperMethods";
 
 class AddPrediction extends Component {
   constructor(props) {
@@ -12,10 +13,14 @@ class AddPrediction extends Component {
       userid: ""
     };
   }
+
+  Auth = new AuthHelperMethods();
+
   componentDidMount() {
+    const user = this.Auth.getConfirm();
     this.setState({
       match: this.props.match,
-      userid: localStorage.getItem("id_token")
+      userid: user.userid
     });
   }
   render() {

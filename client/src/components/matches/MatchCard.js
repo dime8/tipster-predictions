@@ -18,7 +18,8 @@ class MatchCard extends Component {
       handleClickOpen,
       handleClickAdd,
       handleClickDelete,
-      handleClickInvite
+      handleClickInvite,
+      currentUser
     } = this.props;
     let imageUrl = "";
     try {
@@ -69,7 +70,7 @@ class MatchCard extends Component {
           >
             Add prediction
           </Button>
-          {match.userByUserid.id === localStorage.getItem("id_token") ? (
+          {match.userByUserid.id === currentUser.userid ? (
             <Button
               className="matchCardButtons"
               size="small"
@@ -82,7 +83,7 @@ class MatchCard extends Component {
               Delete match
             </Button>
           )}
-          {match.userByUserid.id === localStorage.getItem("id_token") ? (
+          {match.userByUserid.id === currentUser.userid ? (
             <Button
               className="matchCardButtons"
               size="small"

@@ -22,12 +22,12 @@ const MatchesPageQuery = graphql`
 
 export default class MatchesPage extends React.Component {
   render() {
-    console.log("--->>> Current User: ", this.props.currentUserId);
+    console.log("--->>> Current UserMP: ", this.props.currentUser);
     return (
       <QueryRenderer
         environment={environment}
         query={MatchesPageQuery}
-        variables={{ id: this.props.currentUserId }}
+        variables={{ id: this.props.currentUser.userid }}
         render={({ error, props }) => {
           if (error) {
             return <div>Error!</div>;
@@ -35,10 +35,11 @@ export default class MatchesPage extends React.Component {
           if (!props) {
             return <div>Loading...</div>;
           }
-
+          console.log("Meceeeviii", props.userById.joinedMatchesByUserid.nodes);
           return props.userById ? (
             <Matches
               joinedMatches={props.userById.joinedMatchesByUserid.nodes}
+              currentUser={this.props.currentUser}
             />
           ) : null;
         }}

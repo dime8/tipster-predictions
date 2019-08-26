@@ -7,6 +7,8 @@ import AddPrediction from "../predictions/AddPrediction";
 import DeleteMatch from "../matches/DeleteMatch";
 
 import { createFragmentContainer, graphql } from "react-relay";
+import { Card, Button } from "@material-ui/core";
+import { Redirect } from "react-router-dom";
 
 class Matches extends Component {
   state = {
@@ -14,7 +16,8 @@ class Matches extends Component {
     add: false,
     delete: false,
     invite: false,
-    matchId: ""
+    matchId: "",
+    red: false
   };
 
   handleClickOpen = id => () => {
@@ -49,13 +52,8 @@ class Matches extends Component {
       joinedMatch => joinedMatch.matchByMatchid
     );
 
-    console.log("--->>> Matches: ", matches);
-    console.log("--->>> Joined Matches: ", joinedMatches);
-
     const { matchId, open, add } = this.state;
     const selectedMatch = matches.find(match => match.id === matchId);
-    console.log("--->>> Selected match: ", selectedMatch);
-    console.log("--->>> inv open: ", this.state.invite);
     return (
       <React.Fragment>
         <div className="flexContainer">
@@ -68,6 +66,7 @@ class Matches extends Component {
                 handleClickAdd={this.handleClickAdd}
                 handleClickDelete={this.handleClickDelete}
                 handleClickInvite={this.handleClickInvite}
+                currentUser={this.props.currentUser}
               />
             ))}
         </div>
@@ -77,6 +76,7 @@ class Matches extends Component {
             predictions={selectedMatch.predictionsByMatchid.nodes}
             updateMatch={this.updateMatch}
             handleClose={this.handleClose}
+            currentUser={this.props.currentUser}
           />
         )}
 
@@ -86,6 +86,7 @@ class Matches extends Component {
             match={selectedMatch}
             predictions={selectedMatch.predictionsByMatchid.nodes}
             handleClose={this.handleClose}
+            currentUser={this.props.currentUser}
           />
         )}
         {selectedMatch && (
@@ -93,6 +94,7 @@ class Matches extends Component {
             open={this.state.delete}
             match={selectedMatch}
             handleClose={this.handleClose}
+            currentUser={this.props.currentUser}
           />
         )}
         {selectedMatch && (
@@ -100,6 +102,7 @@ class Matches extends Component {
             open={this.state.invite}
             match={selectedMatch}
             handleClose={this.handleClose}
+            currentUser={this.props.currentUser}
           />
         )}
       </React.Fragment>

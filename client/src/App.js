@@ -14,6 +14,9 @@ import NotFound from "./components/pages/NotFound";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 
+import Login from "./login";
+import Signup from "./signup";
+
 // Login from "./components/login/Login";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -28,25 +31,21 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUserId: localStorage.getItem("id_token") || ""
+      currentUserId: "",
+      currentUser: ""
     };
   }
-  /* Create a new instance of the 'AuthHelperMethods' component at the top of the class*/
+
   Auth = new AuthHelperMethods();
-  /* Add the following into _handleLogout*/
+
   _handleLogout = () => {
     this.Auth.logout();
     this.props.history.replace("/login");
   };
   componentDidMount() {
-    const currentUserId = localStorage.getItem("id_token");
-    this.setState({ currentUserId });
+    const user = this.Auth.getConfirm();
+    this.setState({ currentUserId: user.userid, currentUser: user });
   }
-
-  login = currentUserId => {
-    localStorage.setItem("id_token", currentUserId);
-    this.setState({ currentUserId });
-  };
 
   render() {
     let imageUrl = "";
@@ -55,7 +54,7 @@ class App extends React.Component {
     } catch {
       imageUrl = require("./static/images/cards/default.jpg");
     }
-    console.log("--->>> Storage: ", localStorage);
+    console.log("loged ---->>> ", this.state.currentUser);
 
     return (
       <Router>
@@ -63,57 +62,37 @@ class App extends React.Component {
           <Navbar
             login={this.login}
             logout={this._handleLogout}
-            currentUserId={this.state.currentUserId}
+            currentUser={this.state.currentUser}
           />
-          {this.state.currentUserId !== "" ? (
-            <div className="container">
-              <Switch>
-                <Route
-                  exact
-                  path="/creatematch"
-                  component={CreateMatchesPage}
-                />
-                {/* <Route exact path="/" component={MatchesPage} /> */}
-                <Route
-                  exact
-                  path="/"
-                  render={routeProps => (
-                    <MatchesPage
-                      currentUserId={this.state.currentUserId}
-                      key={this.state.currentUserId}
-                    />
-                  )}
-                />
-
-                <Route exact path="/about" component={About} />
-                <Route
-                  exact
-                  path="/invites/:id"
-                  render={props => (
-                    <AcceptInvite
-                      key={this.props.currentUserId}
-                      currentUserId={this.state.currentUserId}
-                      {...props}
-                    />
-                  )}
-                />
-                <Route component={NotFound} />
-              </Switch>
-            </div>
-          ) : (
-            <div>
-              <Typography variant="body2" color="textSecondary" component="p">
-                <span className="LogIn">Please login!</span>
-              </Typography>
-              <CardMedia
-                component="img"
-                alt="sport"
-                height="400"
-                image={imageUrl}
-                title="sport"
+          <div className="container">
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={routeProps => (
+                  <MatchesPage
+                    currentUser={this.state.currentUser}
+                    key={this.state.currentUserId}
+                  />
+                )}
               />
-            </div>
-          )}
+              <Route exact path="/creatematch" component={CreateMatchesPage} />
+
+              <Route exact path="/about" component={About} />
+              <Route
+                exact
+                path="/invites/:id"
+                render={props => (
+                  <AcceptInvite
+                    key={this.props.currentUserId}
+                    currentUserId={this.state.currentUserId}
+                    {...props}
+                  />
+                )}
+              />
+              <Route component={NotFound} />
+            </Switch>
+          </div>
         </div>
       </Router>
     );

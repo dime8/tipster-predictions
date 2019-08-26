@@ -27,6 +27,7 @@ export default class AcceptInvite extends Component {
           ).then(this.setState({ redirect: true }));
         } else {
           alert(err[0].message);
+          this.setState({ redirect: true });
         }
       }
     );

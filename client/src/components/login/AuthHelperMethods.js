@@ -1,15 +1,24 @@
 import decode from "jwt-decode";
 import LoginMutation from "../../mutations/LoginMutation";
+import jwt from "jsonwebtoken";
 
 export default class AuthHelperMethods {
   login = (username, password) => {
     return LoginMutation(username, password, (res, err) => {
-      console.log("printanje greska", err, "rezultat ", res);
+      console.log("printanje greska", err, "rezultat ", res.login);
       if (res.login) {
-        this.setToken(res.login.uuid); // Setting the token in localStorage
+        const token = jwt.sign(
+          {
+            ...res.login.jwtToken
+          },
+          "chelseafc"
+        );
+        this.setToken(token); // Setting the token in localStorage
         return Promise.resolve(res);
       } else {
-        alert("Data not correct: " + err[0].message);
+        err
+          ? alert("Data not correct: " + err[0].message)
+          : alert("Data not correct. ");
       }
     });
   };
@@ -17,12 +26,13 @@ export default class AuthHelperMethods {
   loggedIn = () => {
     // Checks if there is a saved token and it's still valid
     const token = this.getToken(); // Getting token from localstorage
-    return !!token; // handwaiving here
+    return !!token && !this.isTokenExpired(token); // handwaiving here
   };
 
   isTokenExpired = token => {
     try {
       const decoded = decode(token);
+      console.log("Dekodirani token:", decoded, " vrijeme ", Date.now());
       if (decoded.exp < Date.now() / 1000) {
         // Checking if token is expired.
         return true;
@@ -37,25 +47,25 @@ export default class AuthHelperMethods {
     // Saves user token to localStorage
     console.log("postavljanje tokena", idToken);
 
-    localStorage.setItem("id_token", idToken);
+    localStorage.setItem("token", idToken);
   };
 
   getToken = () => {
     // Retrieves the user token from localStorage
 
-    const token = localStorage.getItem("id_token");
+    const token = localStorage.getItem("token");
     console.log("preuzimanje tokena", token);
     return token;
   };
 
   logout = () => {
     // Clear user token and profile data from localStorage
-    localStorage.removeItem("id_token");
+    localStorage.removeItem("token");
   };
 
   getConfirm = () => {
     // Using jwt-decode npm package to decode the token
-    let answer = this.getToken();
+    let answer = decode(this.getToken());
     console.log("Recieved answer!");
     return answer;
   };

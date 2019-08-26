@@ -6,11 +6,15 @@ const store = new Store(new RecordSource());
 // 3
 const network = Network.create((operation, variables) => {
   // 4
-  return fetch("http://localhost:4000/graphql", {
+  const token = localStorage.getItem("token");
+  console.log("Toooooooooooo", localStorage.getItem("token"));
+  return fetch("http://localhost:5000/graphql", {
     method: "POST",
+
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      authorization: token ? `Bearer ${token}` : ""
     },
     body: JSON.stringify({
       query: operation.text,
