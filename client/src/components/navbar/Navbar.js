@@ -4,28 +4,32 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
+import AuthHelperMethods from "../login/AuthHelperMethods";
 import "./Navbar.css";
+import { withRouter } from "react-router-dom";
 
-export default class Navbar extends Component {
+class Navbar extends Component {
   state = {
-    open: false
+    redirect: false
   };
 
-  handleClickOpen = () => {
-    this.setState({
-      open: true
+  Auth = new AuthHelperMethods();
+  _handleLogout = () => {
+    this.Auth.logout();
+    this.props.history.replace({
+      pathname: "/login"
     });
   };
-
-  handleClose = () => {
-    this.setState({
-      open: false
-    });
+  HideNav = () => {
+    const url = this.props.location.pathname;
+    return url === "/login" || url === "/signup";
   };
 
   render() {
-    //   const { currentUser } = this.props;
-    //   console.log("loged user ---->>> ", currentUser);
+    if (this.HideNav()) {
+      return null;
+    }
+
     return (
       <AppBar position="static">
         <Toolbar className="Tbar">
@@ -41,7 +45,7 @@ export default class Navbar extends Component {
           <Link to="/about" className="link">
             About
           </Link>
-          <Button color="inherit" onClick={this.props.logout}>
+          <Button color="inherit" onClick={() => this._handleLogout()}>
             Logout
           </Button>
         </Toolbar>
@@ -49,3 +53,4 @@ export default class Navbar extends Component {
     );
   }
 }
+export default withRouter(Navbar);

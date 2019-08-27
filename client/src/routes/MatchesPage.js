@@ -1,7 +1,8 @@
 import React from "react";
 import { graphql, QueryRenderer } from "react-relay";
-import environment from "../../Environment";
-import Matches from "./Matches";
+import environment from "../Environment";
+import AuthHelperMethods from "../components/login/AuthHelperMethods";
+import Matches from "../components/matches/Matches";
 
 const MatchesPageQuery = graphql`
   query MatchesPageQuery($id: UUID!) {
@@ -21,13 +22,22 @@ const MatchesPageQuery = graphql`
 `;
 
 export default class MatchesPage extends React.Component {
+  Auth = new AuthHelperMethods();
+
+  componentDidMount() {
+    if (!this.Auth.loggedIn()) this.props.history.replace("/login");
+  }
+
   render() {
-    console.log("--->>> Current UserMP: ", this.props.currentUser);
     return (
       <QueryRenderer
         environment={environment}
         query={MatchesPageQuery}
-        variables={{ id: this.props.currentUser.userid }}
+        variables={{
+          id:
+            this.props.history.location.state ||
+            localStorage.getItem("currentUser")
+        }}
         render={({ error, props }) => {
           if (error) {
             return <div>Error!</div>;
@@ -35,11 +45,10 @@ export default class MatchesPage extends React.Component {
           if (!props) {
             return <div>Loading...</div>;
           }
-          console.log("Meceeeviii", props.userById.joinedMatchesByUserid.nodes);
           return props.userById ? (
             <Matches
               joinedMatches={props.userById.joinedMatchesByUserid.nodes}
-              currentUser={this.props.currentUser}
+              currentUser={localStorage.getItem("currentUser")}
             />
           ) : null;
         }}

@@ -25,13 +25,6 @@ const jwt = require("express-jwt");
 
 var app = express();
 
-// authentication middleware
-const authMiddleware = jwt({
-  secret: "somesuperdupersecret"
-});
-
-console.log("---->>>>Tooookeeen:", authMiddleware.unless);
-
 app.use(cors());
 
 //app.use(authMiddleware);

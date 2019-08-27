@@ -29,14 +29,18 @@ class Login extends Component {
         if (res === false) {
           return alert("Sorry those credentials don't exist!");
         }
-        this.props.history.replace("/");
+
+        this.props.history.replace({
+          pathname: "/",
+          state: res.login.jwtToken.userid
+        });
       })
       .catch(err => {
         alert(err);
       });
   };
 
-  componentWillMount() {
+  componentDidMount() {
     /* Here is a great place to redirect someone who is already logged in to the protected route */
     if (this.Auth.loggedIn()) this.props.history.replace("/");
   }

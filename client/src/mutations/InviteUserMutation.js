@@ -22,11 +22,9 @@ export default (userId, matchId, callback) => {
     variables,
     onCompleted: response => {
       callback(response);
-      console.log("--Invite mutation complited. Var: ", variables);
     },
     onError: err => {
       callback(err);
-      console.log("--Invite mutation error. Var: ", variables);
     }
   });
 };

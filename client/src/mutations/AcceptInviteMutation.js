@@ -23,11 +23,9 @@ export default (inviteId, currentuserid, callback) =>
       variables,
       onCompleted: (response, error) => {
         callback(response, error);
-        console.log("-->> Invite  --error:", error, "--res: ", response);
         return resolve(response);
       },
       onError: err => {
-        console.log("-->> Invite error :", err);
         console.error(err);
       }
     });

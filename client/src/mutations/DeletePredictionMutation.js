@@ -59,7 +59,6 @@ export default (id, matchid, callback) => {
     variables,
     onCompleted: response => {
       callback();
-      console.log("daaaaaaaaaaaa");
     },
     updater: store => {
       updater(store, matchid);

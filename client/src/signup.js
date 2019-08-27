@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import AuthHelperMethods from "./components/login/AuthHelperMethods";
 import "./login.css";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import RegisterMutation from "./mutations/RegisterMutation";
 
@@ -33,8 +32,6 @@ export default class Signup extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
-
-    console.log(this.state);
   };
 
   handleFormSubmit = e => {
@@ -42,7 +39,6 @@ export default class Signup extends Component {
 
     this.checkPassUsername() &&
       RegisterMutation(this.state.username, this.state.password, (res, err) => {
-        console.log("printanje greska", err, "rezultat ", res);
         if (res.registerUser) {
           alert("User registred!" + res.registerUser.uuid);
           this.setState({ username: "", password: "", confirm_password: "" });
@@ -54,7 +50,6 @@ export default class Signup extends Component {
   };
 
   componentDidMount() {
-    console.log(this.Auth.loggedIn());
     if (this.Auth.loggedIn()) {
       this.props.history.push("/");
     }

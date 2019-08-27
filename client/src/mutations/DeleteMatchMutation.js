@@ -29,8 +29,6 @@ const updater = (store, userid) => {
     .getLinkedRecord("joinedMatchesByUserid")
     .getLinkedRecords("nodes");
   const deletedMatchId = getDeletedNode(store);
-  console.log("---id ", deletedMatchId, " matches ", joinedMatches);
-  console.log("--- delete", store.getRoot());
 
   const newJoinedMatches = joinedMatches.filter(joinedMatch => {
     const joinedMatchID = joinedMatch.getValue("matchid");
@@ -54,7 +52,6 @@ export default (id, userid, callback) => {
     variables,
     onCompleted: response => {
       callback();
-      console.log("daaaaaaaaaaaa");
     },
     updater: store => {
       updater(store, userid);

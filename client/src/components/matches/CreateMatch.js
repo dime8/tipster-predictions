@@ -4,7 +4,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { createFragmentContainer, graphql } from "react-relay";
 
-import { withRouter, browserHistory } from "react-router";
+import { withRouter } from "react-router";
 
 import { Redirect } from "react-router-dom";
 
@@ -30,6 +30,7 @@ class CreateMatch extends Component {
   }
 
   Auth = new AuthHelperMethods();
+
   componentDidMount() {
     const user = this.Auth.getConfirm();
     this.setState({ userid: user.userid, curentUser: user });
@@ -67,7 +68,7 @@ class CreateMatch extends Component {
             res.createMatch.matchEdge.node.id,
             res.createMatch.matchEdge.node.userid,
             res => {
-              console.log("...Match: ", res);
+              console.log("---Match: ", res);
             }
           );
 

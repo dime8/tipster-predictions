@@ -28,7 +28,6 @@ class PredictionCard extends Component {
 
   render() {
     const { prediction, currentUser } = this.props;
-    console.log(this.props);
 
     return (
       <Card className="card">
@@ -45,7 +44,7 @@ class PredictionCard extends Component {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          {prediction.userByUserid.id === currentUser.userid ? (
+          {prediction.userByUserid.id === currentUser ? (
             <Button
               size="small"
               color="primary"

@@ -9,8 +9,6 @@ import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
 
-import { createFragmentContainer, graphql } from "react-relay";
-
 class MatchCard extends Component {
   render() {
     const {
@@ -18,8 +16,7 @@ class MatchCard extends Component {
       handleClickOpen,
       handleClickAdd,
       handleClickDelete,
-      handleClickInvite,
-      currentUser
+      handleClickInvite
     } = this.props;
     let imageUrl = "";
     try {
@@ -27,7 +24,6 @@ class MatchCard extends Component {
     } catch {
       imageUrl = require("../../static/images/cards/default.jpg");
     }
-    console.log("match------", match.userByUserid.id);
     return (
       <Card className="card">
         <CardActionArea>
@@ -70,7 +66,7 @@ class MatchCard extends Component {
           >
             Add prediction
           </Button>
-          {match.userByUserid.id === currentUser.userid ? (
+          {match.userByUserid.id === this.props.currentUser ? (
             <Button
               className="matchCardButtons"
               size="small"
@@ -83,7 +79,7 @@ class MatchCard extends Component {
               Delete match
             </Button>
           )}
-          {match.userByUserid.id === currentUser.userid ? (
+          {match.userByUserid.id === this.props.currentUser ? (
             <Button
               className="matchCardButtons"
               size="small"

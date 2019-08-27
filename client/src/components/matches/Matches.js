@@ -7,8 +7,6 @@ import AddPrediction from "../predictions/AddPrediction";
 import DeleteMatch from "../matches/DeleteMatch";
 
 import { createFragmentContainer, graphql } from "react-relay";
-import { Card, Button } from "@material-ui/core";
-import { Redirect } from "react-router-dom";
 
 class Matches extends Component {
   state = {

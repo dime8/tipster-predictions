@@ -7,7 +7,6 @@ const store = new Store(new RecordSource());
 const network = Network.create((operation, variables) => {
   // 4
   const token = localStorage.getItem("token");
-  console.log("Toooooooooooo", localStorage.getItem("token"));
   return fetch("http://localhost:5000/graphql", {
     method: "POST",
 

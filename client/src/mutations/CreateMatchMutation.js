@@ -36,12 +36,10 @@ export default (type, league, hostid, guestid, userid, callback) =>
       mutation,
       variables,
       onCompleted: (response, error) => {
-        console.log("--->>> Mutation errors: ", error, " --res ", response);
         callback(response, error);
         return resolve(response);
       },
       onError: err => {
-        console.log(variables);
         console.error(err);
       }
     });

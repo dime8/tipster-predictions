@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 69f658b00d3efef1cdebe5e579f644e4
+ * @relayHash bc0ec374461c83cb7a7cd46a12fc3973
  */
 
 /* eslint-disable */
@@ -27,7 +27,7 @@ export type CreateMatchesPageQuery = {|
 
 /*
 query CreateMatchesPageQuery {
-  allTeams(first: 5000) {
+  allTeams {
     nodes {
       ...CreateMatch_teams
     }
@@ -42,15 +42,7 @@ fragment CreateMatch_teams on Team {
 }
 */
 
-const node/*: ConcreteRequest*/ = (function(){
-var v0 = [
-  {
-    "kind": "Literal",
-    "name": "first",
-    "value": 5000
-  }
-];
-return {
+const node/*: ConcreteRequest*/ = {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
@@ -63,8 +55,8 @@ return {
         "kind": "LinkedField",
         "alias": null,
         "name": "allTeams",
-        "storageKey": "allTeams(first:5000)",
-        "args": (v0/*: any*/),
+        "storageKey": null,
+        "args": null,
         "concreteType": "TeamsConnection",
         "plural": false,
         "selections": [
@@ -97,8 +89,8 @@ return {
         "kind": "LinkedField",
         "alias": null,
         "name": "allTeams",
-        "storageKey": "allTeams(first:5000)",
-        "args": (v0/*: any*/),
+        "storageKey": null,
+        "args": null,
         "concreteType": "TeamsConnection",
         "plural": false,
         "selections": [
@@ -149,11 +141,10 @@ return {
     "operationKind": "query",
     "name": "CreateMatchesPageQuery",
     "id": null,
-    "text": "query CreateMatchesPageQuery {\n  allTeams(first: 5000) {\n    nodes {\n      ...CreateMatch_teams\n    }\n  }\n}\n\nfragment CreateMatch_teams on Team {\n  id\n  name\n  league\n  type\n}\n",
+    "text": "query CreateMatchesPageQuery {\n  allTeams {\n    nodes {\n      ...CreateMatch_teams\n    }\n  }\n}\n\nfragment CreateMatch_teams on Team {\n  id\n  name\n  league\n  type\n}\n",
     "metadata": {}
   }
 };
-})();
 // prettier-ignore
-(node/*: any*/).hash = '141ebcc612dfbbaf50c75c224b013d39';
+(node/*: any*/).hash = 'c0356cde613fbb3022ce4f9146228ee0';
 module.exports = node;

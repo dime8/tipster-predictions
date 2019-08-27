@@ -45,7 +45,6 @@ class AddPrediction extends Component {
   _addPrediction = () => {
     const { score, userid } = this.state;
     const matchid = this.state.match.id;
-    console.log(matchid, score);
     CreatePredictionMutation(score, matchid, userid, res => {
       console.log("Mutation completed!");
       alert(`Prediction added! 

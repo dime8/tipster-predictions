@@ -1,11 +1,11 @@
 import React from "react";
 import { graphql, QueryRenderer } from "react-relay";
-import environment from "../../Environment";
-import CreateMatch from "./CreateMatch";
+import environment from "../Environment";
+import CreateMatch from "../components/matches/CreateMatch";
 
 const CreateMatchesPageQuery = graphql`
   query CreateMatchesPageQuery {
-    allTeams(first: 5000) {
+    allTeams {
       nodes {
         ...CreateMatch_teams
       }

@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-// import './AllUsersList.css';
 import environment from "../../Environment";
 import { graphql, QueryRenderer } from "react-relay";
 
-import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
@@ -43,8 +40,6 @@ export default class AllUserList extends Component {
           if (!props) {
             return <div>Loading...</div>;
           }
-
-          console.log(this.state);
           return (
             <div>
               <div className={"this.props.classes.root"}>

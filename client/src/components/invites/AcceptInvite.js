@@ -15,14 +15,14 @@ export default class AcceptInvite extends Component {
     console.log("-->> fsk :", this.props);
     AcceptInviteMutation(
       this.props.match.params.id,
-      this.props.currentUserId,
+      this.props.currentUser,
       (res, err) => {
         if (res.acceptInvite) {
-          console.log("Invite accepted!");
+          console.log("Invite accepted!", res);
 
           JoinedMatchesMutation(
             res.acceptInvite.uuid,
-            this.props.currentUserId,
+            this.props.currentUser,
             () => console.log("User joined to room!")
           ).then(this.setState({ redirect: true }));
         } else {

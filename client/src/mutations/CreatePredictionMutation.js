@@ -56,14 +56,12 @@ export default (score, matchid, userid, callback) => {
     variables,
     onCompleted: response => {
       callback(response);
-      console.log("daaaaaaaaaaaa");
     },
     updater: store => {
       updater(store, variables);
     },
     onError: err => {
       console.error(err);
-      console.log("neeeeeeeeeeee");
     }
   });
 };
