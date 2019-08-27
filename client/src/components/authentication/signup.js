@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import AuthHelperMethods from "./components/login/AuthHelperMethods";
+import AuthHelperMethods from "./AuthHelperMethods";
 import "./login.css";
 import { Link } from "react-router-dom";
-import RegisterMutation from "./mutations/RegisterMutation";
+import RegisterMutation from "../../mutations/RegisterMutation";
 
 export default class Signup extends Component {
   Auth = new AuthHelperMethods();

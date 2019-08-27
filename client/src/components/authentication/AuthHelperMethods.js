@@ -72,7 +72,6 @@ export default class AuthHelperMethods {
     let answer = null;
     try {
       answer = decode(this.getToken());
-      console.log("Recieved answer!");
     } catch {}
     return answer;
   };

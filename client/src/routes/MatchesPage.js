@@ -1,7 +1,7 @@
 import React from "react";
 import { graphql, QueryRenderer } from "react-relay";
 import environment from "../Environment";
-import AuthHelperMethods from "../components/login/AuthHelperMethods";
+import AuthHelperMethods from "../components/authentication/AuthHelperMethods";
 import Matches from "../components/matches/Matches";
 
 const MatchesPageQuery = graphql`

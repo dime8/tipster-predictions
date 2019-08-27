@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import Routes from "./Routes";
-import AuthHelperMethods from "./components/login/AuthHelperMethods";
+import AuthHelperMethods from "./components/authentication/AuthHelperMethods";
 
 import "./App.css";
 

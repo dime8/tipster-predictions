@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import environment from "../../Environment";
+import environment from "../Environment";
 import { graphql, QueryRenderer } from "react-relay";
 
 import InputLabel from "@material-ui/core/InputLabel";

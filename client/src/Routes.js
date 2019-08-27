@@ -4,9 +4,9 @@ import Navbar from "./components/navbar/Navbar";
 import About from "./components/pages/About";
 import NotFound from "./components/pages/NotFound";
 import CreateMatchesPage from "./routes/CreateMatchesPage";
-import AcceptInvite from "./components/invites/AcceptInvite";
-import Login from "./login";
-import Signup from "./signup";
+import AcceptInvite from "./routes/AcceptInvite";
+import Login from "./components/authentication/login";
+import Signup from "./components/authentication/signup";
 import "./App.css";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";

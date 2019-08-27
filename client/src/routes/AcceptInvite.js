@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import AcceptInviteMutation from "../../mutations/AcceptInviteMutation";
-import JoinedMatchesMutation from "../../mutations/JoinedMatchesMutation";
+import AcceptInviteMutation from "../mutations/AcceptInviteMutation";
+import JoinedMatchesMutation from "../mutations/JoinedMatchesMutation";
 import { Redirect } from "react-router-dom";
 
 export default class AcceptInvite extends Component {
@@ -12,7 +12,6 @@ export default class AcceptInvite extends Component {
   }
 
   _acceptInvite = () => {
-    console.log("-->> fsk :", this.props);
     AcceptInviteMutation(
       this.props.match.params.id,
       this.props.currentUser,

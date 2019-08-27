@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import CreatePredictionMutation from "../../mutations/CreatePredictionMutation";
 import AddDialog from "./AddDialog";
-import AuthHelperMethods from "../login/AuthHelperMethods";
+import AuthHelperMethods from "../authentication/AuthHelperMethods";
 
 class AddPrediction extends Component {
   constructor(props) {

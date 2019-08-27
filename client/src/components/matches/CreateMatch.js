@@ -12,7 +12,7 @@ import TextField from "@material-ui/core/TextField";
 
 import CreateMatchMutation from "../../mutations/CreateMatchMutation";
 import JoinedMatchesMutation from "../../mutations/JoinedMatchesMutation";
-import AuthHelperMethods from "../login/AuthHelperMethods";
+import AuthHelperMethods from "../authentication/AuthHelperMethods";
 
 class CreateMatch extends Component {
   constructor(props) {

@@ -4,7 +4,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-import AuthHelperMethods from "../login/AuthHelperMethods";
+import AuthHelperMethods from "../authentication/AuthHelperMethods";
 import "./Navbar.css";
 import { withRouter } from "react-router-dom";
 
