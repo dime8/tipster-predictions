@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
 import Routes from "./Routes";
-import AuthHelperMethods from "./components/authentication/AuthHelperMethods";
 
 import "./App.css";
 
@@ -12,7 +11,6 @@ class App extends React.Component {
       currentUser: localStorage.getItem("currentUser") || ""
     };
   }
-  Auth = new AuthHelperMethods();
 
   componentDidMount() {
     // const currentUser = this.Auth.getConfirm();

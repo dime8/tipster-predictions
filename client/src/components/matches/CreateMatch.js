@@ -11,29 +11,49 @@ import { Redirect } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 
 import CreateMatchMutation from "../../mutations/CreateMatchMutation";
+import UpdateMatchMutation from "../../mutations/UpdateMatchMutation";
 import JoinedMatchesMutation from "../../mutations/JoinedMatchesMutation";
 import AuthHelperMethods from "../authentication/AuthHelperMethods";
 
 class CreateMatch extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       type: "",
       league: "",
       hostid: "",
       guestid: "",
-      userid: "",
+      userid: localStorage.getItem("currentUser"),
       teams: props.teams,
+      matches: props.matches,
       redirect: false
     };
+
+    this.Auth = new AuthHelperMethods();
   }
 
-  Auth = new AuthHelperMethods();
-
   componentDidMount() {
-    const user = this.Auth.getConfirm();
-    this.setState({ userid: user.userid, curentUser: user });
+    let match = {};
+    if (this.isEditMatchRoute()) {
+      match = this.state.matches.find(
+        match =>
+          match.id === this.props.match.params.id &&
+          match.userid === this.state.userid
+      );
+      if (match) {
+        this.setState({
+          id: match.id,
+          type: match.type,
+          league: match.league,
+          hostid: match.teamByHostid.id,
+          guestid: match.teamByGuestid.id
+        });
+      } else {
+        this.props.history.replace({
+          pathname: "/not-found"
+        });
+      }
+    }
   }
 
   handleChange = event => {
@@ -44,46 +64,61 @@ class CreateMatch extends Component {
       [name]: value
     });
   };
+  isEditMatchRoute = () => {
+    return this.props.match.path === "/match/:id";
+  };
 
   handleSubmit = event => {
     event.preventDefault();
-    CreateMatchMutation(
-      this.state.type,
-      this.state.league,
-      this.state.hostid,
-      this.state.guestid,
-      this.state.userid,
-      (res, err) => {
-        console.log(
-          "--->>> Errors: ",
-          err,
-          " --res ",
-          res.createMatch.matchEdge.node.id
-        );
-        if (!err) {
-          console.log("Match created!");
-          alert(`Match added!`);
-
-          JoinedMatchesMutation(
-            res.createMatch.matchEdge.node.id,
-            res.createMatch.matchEdge.node.userid,
-            res => {
-              console.log("---Match: ", res);
-            }
-          );
-
-          this.setState({
-            type: "",
-            league: "",
-            hostid: "",
-            guestid: ""
-          });
+    if (this.isEditMatchRoute()) {
+      UpdateMatchMutation(
+        this.state.id,
+        this.state.type,
+        this.state.league,
+        this.state.hostid,
+        this.state.guestid,
+        this.state.userid,
+        (res, err) => {
+          if (!err) {
+            console.log("Match edited!", res);
+            alert(`Match edited!`);
+          }
         }
-      }
-    ).then(() => this.setState({ redirect: true }));
+      ).then(() => this.setState({ redirect: true }));
+    } else {
+      CreateMatchMutation(
+        this.state.type,
+        this.state.league,
+        this.state.hostid,
+        this.state.guestid,
+        this.state.userid,
+        (res, err) => {
+          if (!err) {
+            console.log("Match created!");
+            alert(`Match added!`);
+
+            JoinedMatchesMutation(
+              res.createMatch.matchEdge.node.id,
+              res.createMatch.matchEdge.node.userid,
+              res => {
+                console.log("---Match: ", res);
+              }
+            );
+
+            this.setState({
+              type: "",
+              league: "",
+              hostid: "",
+              guestid: ""
+            });
+          }
+        }
+      ).then(() => this.setState({ redirect: true }));
+    }
   };
 
   render() {
+    console.log("Create ", this.state);
     const { teams, redirect } = this.state;
     const hosts = teams.filter(team => team.id !== this.state.guestid);
     const guests = teams.filter(team => team.id !== this.state.hostid);
@@ -170,6 +205,22 @@ export default withRouter(
         name
         league
         type
+      }
+    `,
+    matches: graphql`
+      fragment CreateMatch_matches on Match @relay(plural: true) {
+        id
+        type
+        league
+        userid
+        teamByHostid {
+          id
+          name
+        }
+        teamByGuestid {
+          id
+          name
+        }
       }
     `
   })

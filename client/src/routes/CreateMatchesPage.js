@@ -10,6 +10,11 @@ const CreateMatchesPageQuery = graphql`
         ...CreateMatch_teams
       }
     }
+    allMatches {
+      nodes {
+        ...CreateMatch_matches
+      }
+    }
   }
 `;
 
@@ -27,7 +32,13 @@ export default class CreateMatchesPage extends React.Component {
           if (!props) {
             return <div>Loading...</div>;
           }
-          return <CreateMatch teams={props.allTeams.nodes} />;
+          return (
+            <CreateMatch
+              teams={props.allTeams.nodes}
+              matches={props.allMatches.nodes}
+              {...this.props}
+            />
+          );
         }}
       />
     );

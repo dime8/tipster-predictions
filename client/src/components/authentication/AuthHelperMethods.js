@@ -20,6 +20,7 @@ export default class AuthHelperMethods {
 
         this.setToken(token);
         localStorage.setItem("currentUser", res.login.jwtToken.userid); // Setting the token in localStorage
+        localStorage.setItem("username", res.login.jwtToken.username); // Setting the token in localStorage
         return Promise.resolve(res);
       } else {
         err
@@ -65,6 +66,7 @@ export default class AuthHelperMethods {
     // Clear user token and profile data from localStorage
     localStorage.removeItem("token");
     localStorage.removeItem("currentUser");
+    localStorage.removeItem("username");
   };
 
   getConfirm = () => {

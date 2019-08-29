@@ -38,10 +38,14 @@ class AddDialog extends React.Component {
             />
           </DialogContent>
           <DialogActions className="Actions">
-            <Button onClick={this.props._addPrediction} /* color="primary"*/>
+            <Button
+              onClick={() => this.props._addPrediction()} /* color="primary"*/
+            >
               Add
             </Button>
-            <Button onClick={handleClose} /* color="primary"*/>Close</Button>
+            <Button onClick={() => handleClose()} /* color="primary"*/>
+              Close
+            </Button>
           </DialogActions>
         </Dialog>
       </div>

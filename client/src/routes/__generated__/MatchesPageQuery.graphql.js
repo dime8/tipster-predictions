@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash d5c28de2e82032cd0e6b00ee65909f07
+ * @relayHash ba13f3b3a32fdc27de83992cc69d6675
  */
 
 /* eslint-disable */
@@ -53,29 +53,34 @@ query MatchesPageQuery(
 fragment Matches_joinedMatches on JoinedMatch {
   matchByMatchid {
     id
-    type
-    league
-    teamByHostid {
-      name
-    }
-    teamByGuestid {
-      name
-    }
-    predictionsByMatchid(orderBy: USERID_ASC) {
-      nodes {
+    ...MatchCard_match
+  }
+}
+
+fragment MatchCard_match on Match {
+  id
+  type
+  league
+  teamByHostid {
+    name
+  }
+  teamByGuestid {
+    name
+  }
+  predictionsByMatchid(orderBy: USERID_ASC) {
+    nodes {
+      id
+      score
+      ...PredictionsDialog_predictions
+      userByUserid {
         id
-        score
-        ...PredictionsDialog_predictions
-        userByUserid {
-          id
-          username
-        }
+        username
       }
     }
-    userByUserid {
-      id
-      username
-    }
+  }
+  userByUserid {
+    id
+    username
   }
 }
 
@@ -345,7 +350,7 @@ return {
     "operationKind": "query",
     "name": "MatchesPageQuery",
     "id": null,
-    "text": "query MatchesPageQuery(\n  $id: UUID!\n) {\n  userById(id: $id) {\n    joinedMatchesByUserid {\n      nodes {\n        matchid\n        ...Matches_joinedMatches\n        matchByMatchid {\n          id\n        }\n      }\n    }\n  }\n}\n\nfragment Matches_joinedMatches on JoinedMatch {\n  matchByMatchid {\n    id\n    type\n    league\n    teamByHostid {\n      name\n    }\n    teamByGuestid {\n      name\n    }\n    predictionsByMatchid(orderBy: USERID_ASC) {\n      nodes {\n        id\n        score\n        ...PredictionsDialog_predictions\n        userByUserid {\n          id\n          username\n        }\n      }\n    }\n    userByUserid {\n      id\n      username\n    }\n  }\n}\n\nfragment PredictionsDialog_predictions on Prediction {\n  id\n  ...PredictionCard_prediction\n}\n\nfragment PredictionCard_prediction on Prediction {\n  id\n  matchid\n  score\n  userByUserid {\n    id\n    username\n  }\n}\n",
+    "text": "query MatchesPageQuery(\n  $id: UUID!\n) {\n  userById(id: $id) {\n    joinedMatchesByUserid {\n      nodes {\n        matchid\n        ...Matches_joinedMatches\n        matchByMatchid {\n          id\n        }\n      }\n    }\n  }\n}\n\nfragment Matches_joinedMatches on JoinedMatch {\n  matchByMatchid {\n    id\n    ...MatchCard_match\n  }\n}\n\nfragment MatchCard_match on Match {\n  id\n  type\n  league\n  teamByHostid {\n    name\n  }\n  teamByGuestid {\n    name\n  }\n  predictionsByMatchid(orderBy: USERID_ASC) {\n    nodes {\n      id\n      score\n      ...PredictionsDialog_predictions\n      userByUserid {\n        id\n        username\n      }\n    }\n  }\n  userByUserid {\n    id\n    username\n  }\n}\n\nfragment PredictionsDialog_predictions on Prediction {\n  id\n  ...PredictionCard_prediction\n}\n\nfragment PredictionCard_prediction on Prediction {\n  id\n  matchid\n  score\n  userByUserid {\n    id\n    username\n  }\n}\n",
     "metadata": {}
   }
 };

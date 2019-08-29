@@ -46,6 +46,8 @@ DECLARE currentTime TIMESTAMP := now()::timestamp;
 
            IF(v_accepted_count<1 AND v_invite_count>0 AND expiresIn>=currentTime AND userid=currentUserId)
 				THEN UPDATE tipsters.invites SET accepted = acceptedInvite WHERE  id=invite_id ;
+				INSERT INTO tipsters.joined_matches (matchid, userid)
+				VALUES (matchid, currentUserId);
 			END IF;
 
 		 	RETURN matchid;

@@ -15,22 +15,28 @@ class Matches extends Component {
     delete: false,
     invite: false,
     matchId: "",
-    red: false
+    match: null
   };
 
-  handleClickOpen = id => () => {
-    this.setState({ open: true, matchId: id });
+  handleClickOpen = match => {
+    this.setState({ open: true, match });
   };
 
-  handleClickAdd = id => () => {
-    this.setState({ add: true, matchId: id });
+  handleClickAdd = match => {
+    this.setState({ add: true, match });
   };
 
-  handleClickDelete = id => () => {
-    this.setState({ delete: true, matchId: id });
+  handleClickEdit = match => {
+    this.props.history.replace({
+      pathname: `/match/${match.id}`
+    });
   };
-  handleClickInvite = id => () => {
-    this.setState({ invite: true, matchId: id });
+
+  handleClickDelete = match => {
+    this.setState({ delete: true, match });
+  };
+  handleClickInvite = match => {
+    this.setState({ invite: true, match });
   };
 
   handleClose = () => {
@@ -39,7 +45,8 @@ class Matches extends Component {
       open: false,
       add: false,
       invite: false,
-      matchId: ""
+      matchId: "",
+      match: null
     });
   };
 
@@ -50,8 +57,8 @@ class Matches extends Component {
       joinedMatch => joinedMatch.matchByMatchid
     );
 
-    const { matchId, open, add } = this.state;
-    const selectedMatch = matches.find(match => match.id === matchId);
+    const { open, add } = this.state;
+    const selectedMatch = this.state.match;
     return (
       <React.Fragment>
         <div className="flexContainer">
@@ -64,11 +71,12 @@ class Matches extends Component {
                 handleClickAdd={this.handleClickAdd}
                 handleClickDelete={this.handleClickDelete}
                 handleClickInvite={this.handleClickInvite}
+                handleClickEdit={this.handleClickEdit}
                 currentUser={this.props.currentUser}
               />
             ))}
         </div>
-        {selectedMatch && (
+        {selectedMatch !== null && (
           <PredictionsDialog
             open={open}
             predictions={selectedMatch.predictionsByMatchid.nodes}
@@ -78,7 +86,7 @@ class Matches extends Component {
           />
         )}
 
-        {selectedMatch && (
+        {selectedMatch !== null && (
           <AddPrediction
             open={add}
             match={selectedMatch}
@@ -87,7 +95,7 @@ class Matches extends Component {
             currentUser={this.props.currentUser}
           />
         )}
-        {selectedMatch && (
+        {selectedMatch !== null && (
           <DeleteMatch
             open={this.state.delete}
             match={selectedMatch}
@@ -95,7 +103,7 @@ class Matches extends Component {
             currentUser={this.props.currentUser}
           />
         )}
-        {selectedMatch && (
+        {selectedMatch !== null && (
           <InviteUser
             open={this.state.invite}
             match={selectedMatch}
@@ -117,29 +125,7 @@ export default createFragmentContainer(Matches, {
     fragment Matches_joinedMatches on JoinedMatch @relay(plural: true) {
       matchByMatchid {
         id
-        type
-        league
-        teamByHostid {
-          name
-        }
-        teamByGuestid {
-          name
-        }
-        predictionsByMatchid(orderBy: USERID_ASC) {
-          nodes {
-            id
-            score
-            ...PredictionsDialog_predictions
-            userByUserid {
-              id
-              username
-            }
-          }
-        }
-        userByUserid {
-          id
-          username
-        }
+        ...MatchCard_match
       }
     }
   `

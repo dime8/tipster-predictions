@@ -12,9 +12,8 @@ class AddPrediction extends Component {
       match: "",
       userid: ""
     };
+    this.Auth = new AuthHelperMethods();
   }
-
-  Auth = new AuthHelperMethods();
 
   componentDidMount() {
     const user = this.Auth.getConfirm();
@@ -24,6 +23,7 @@ class AddPrediction extends Component {
     });
   }
   render() {
+    console.log(this.props.match);
     return (
       <div>
         <AddDialog

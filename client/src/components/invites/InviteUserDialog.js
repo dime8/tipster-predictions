@@ -45,7 +45,7 @@ class InviteUserDialog extends React.Component {
             ) : (
               <Button onClick={() => _inviteUser(this.state.id)}>Invite</Button>
             )}
-            <Button onClick={handleClose}>Close</Button>
+            <Button onClick={() => handleClose()}>Close</Button>
           </DialogActions>
         </Dialog>
       </div>

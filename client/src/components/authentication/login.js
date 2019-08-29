@@ -6,13 +6,15 @@ import { Link } from "react-router-dom";
 import "./login.css";
 
 class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      password: ""
+    };
+    this.Auth = new AuthHelperMethods();
+  }
   /* In order to utilize our authentication methods within the AuthService class, we want to instantiate a new object */
-  Auth = new AuthHelperMethods();
-
-  state = {
-    username: "",
-    password: ""
-  };
 
   /* Fired off every time the use enters something into the input fields */
   _handleChange = e => {

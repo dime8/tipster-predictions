@@ -48,7 +48,7 @@ class PredictionCard extends Component {
             <Button
               size="small"
               color="primary"
-              onClick={this.deletePrediction}
+              onClick={() => this.deletePrediction()}
             >
               Delete predictions
             </Button>

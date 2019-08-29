@@ -4,9 +4,10 @@ import Navbar from "./components/navbar/Navbar";
 import About from "./components/pages/About";
 import NotFound from "./components/pages/NotFound";
 import CreateMatchesPage from "./routes/CreateMatchesPage";
-import AcceptInvite from "./routes/AcceptInvite";
-import Login from "./components/authentication/login";
-import Signup from "./components/authentication/signup";
+import AcceptInvite from "./components/invites/AcceptInvite";
+import Login from "./components/authentication/Login";
+import Signup from "./components/authentication/Signup";
+import PrivateComponent from "./utils/PrivateComponent";
 import "./App.css";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -19,20 +20,22 @@ export default class Routes extends Component {
           <Navbar />
           <div className="container">
             <Switch>
-              <Route exact path="/" component={MatchesPage} />
-              <Route exact path="/creatematch" component={CreateMatchesPage} />
-
-              <Route exact path="/about" component={About} />
-              <Route
+              <PrivateComponent component={MatchesPage} exact path="/" />
+              <PrivateComponent
+                component={CreateMatchesPage}
+                exact
+                path="/create-match"
+              />
+              <PrivateComponent
+                component={CreateMatchesPage}
+                exact
+                path="/match/:id"
+              />
+              <PrivateComponent exact path="/about" component={About} />
+              <PrivateComponent
+                component={AcceptInvite}
                 exact
                 path="/invites/:id"
-                render={props => (
-                  <AcceptInvite
-                    key={this.props.currentUserId}
-                    currentUser={localStorage.getItem("currentUser")}
-                    {...props}
-                  />
-                )}
               />
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />

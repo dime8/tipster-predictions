@@ -28,10 +28,14 @@ class DeleteDialog extends React.Component {
             </DialogContentText>
           </DialogContent>
           <DialogActions className="Actions">
-            <Button onClick={this.props._deleteMatch} /* color="primary"*/>
+            <Button
+              onClick={() => this.props._deleteMatch()} /* color="primary"*/
+            >
               Yes
             </Button>
-            <Button onClick={handleClose} /* color="primary"*/>No</Button>
+            <Button onClick={() => handleClose()} /* color="primary"*/>
+              No
+            </Button>
           </DialogActions>
         </Dialog>
       </div>

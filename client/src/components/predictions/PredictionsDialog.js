@@ -44,7 +44,9 @@ class PredictionsDialog extends React.Component {
             )}
           </DialogContent>
           <DialogActions className="Actions">
-            <Button onClick={handleClose} /* color="primary"*/>Close</Button>
+            <Button onClick={() => handleClose()} /* color="primary"*/>
+              Close
+            </Button>
           </DialogActions>
         </Dialog>
       </div>

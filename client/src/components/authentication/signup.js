@@ -5,12 +5,15 @@ import { Link } from "react-router-dom";
 import RegisterMutation from "../../mutations/RegisterMutation";
 
 export default class Signup extends Component {
-  Auth = new AuthHelperMethods();
-  state = {
-    username: "",
-    password: "",
-    confirm_password: ""
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      password: "",
+      confirm_password: ""
+    };
+    this.Auth = new AuthHelperMethods();
+  }
 
   checkPassUsername = () => {
     if (this.state.username.length < 4)
@@ -85,7 +88,7 @@ export default class Signup extends Component {
                 type="confirm_password"
                 onChange={this._handleChange}
               />
-              <button className="form-submit" onClick={this.handleFormSubmit}>
+              <button className="form-submit" onClick={this.handleFormSubmit()}>
                 Signup
               </button>
             </form>

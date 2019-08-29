@@ -7,6 +7,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
+import { createFragmentContainer, graphql } from "react-relay";
 import Typography from "@material-ui/core/Typography";
 
 class MatchCard extends Component {
@@ -16,7 +17,8 @@ class MatchCard extends Component {
       handleClickOpen,
       handleClickAdd,
       handleClickDelete,
-      handleClickInvite
+      handleClickInvite,
+      handleClickEdit
     } = this.props;
     let imageUrl = "";
     try {
@@ -55,14 +57,18 @@ class MatchCard extends Component {
           <Button
             className="matchCardButtons"
             size="small"
-            onClick={handleClickOpen(match.id)}
+            onClick={() => {
+              handleClickOpen(match);
+            }}
           >
             See predictions
           </Button>
           <Button
             className="matchCardButtons"
             size="small"
-            onClick={handleClickAdd(match.id)}
+            onClick={() => {
+              handleClickAdd(match);
+            }}
           >
             Add prediction
           </Button>
@@ -70,7 +76,24 @@ class MatchCard extends Component {
             <Button
               className="matchCardButtons"
               size="small"
-              onClick={handleClickDelete(match.id)}
+              onClick={() => {
+                handleClickEdit(match);
+              }}
+            >
+              Edit match
+            </Button>
+          ) : (
+            <Button className="matchCardButtons" size="small" disabled>
+              Edit match
+            </Button>
+          )}
+          {match.userByUserid.id === this.props.currentUser ? (
+            <Button
+              className="matchCardButtons"
+              size="small"
+              onClick={() => {
+                handleClickDelete(match);
+              }}
             >
               Delete match
             </Button>
@@ -83,7 +106,9 @@ class MatchCard extends Component {
             <Button
               className="matchCardButtons"
               size="small"
-              onClick={handleClickInvite(match.id)}
+              onClick={() => {
+                handleClickInvite(match);
+              }}
             >
               Invite
             </Button>
@@ -101,4 +126,33 @@ MatchCard.propTypes = {
   match: PropTypes.object.isRequired
 };
 
-export default MatchCard;
+export default createFragmentContainer(MatchCard, {
+  match: graphql`
+    fragment MatchCard_match on Match {
+      id
+      type
+      league
+      teamByHostid {
+        name
+      }
+      teamByGuestid {
+        name
+      }
+      predictionsByMatchid(orderBy: USERID_ASC) {
+        nodes {
+          id
+          score
+          ...PredictionsDialog_predictions
+          userByUserid {
+            id
+            username
+          }
+        }
+      }
+      userByUserid {
+        id
+        username
+      }
+    }
+  `
+});

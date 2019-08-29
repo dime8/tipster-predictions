@@ -9,24 +9,23 @@ import "./Navbar.css";
 import { withRouter } from "react-router-dom";
 
 class Navbar extends Component {
-  state = {
-    redirect: false
-  };
+  constructor(props) {
+    super(props);
+    this.Auth = new AuthHelperMethods();
+  }
 
-  Auth = new AuthHelperMethods();
   _handleLogout = () => {
     this.Auth.logout();
     this.props.history.replace({
       pathname: "/login"
     });
   };
-  HideNav = () => {
-    const url = this.props.location.pathname;
-    return url === "/login" || url === "/signup";
+  hideNav = () => {
+    return !this.Auth.loggedIn();
   };
 
   render() {
-    if (this.HideNav()) {
+    if (this.hideNav()) {
       return null;
     }
 
@@ -36,7 +35,7 @@ class Navbar extends Component {
           <Link to="/" className="link">
             Home
           </Link>
-          <Link to="/creatematch" className="link">
+          <Link to="/create-match" className="link">
             Add Match
           </Link>
           <Typography variant="h6" className="title">
@@ -45,9 +44,16 @@ class Navbar extends Component {
           <Link to="/about" className="link">
             About
           </Link>
-          <Button color="inherit" onClick={() => this._handleLogout()}>
+          <Typography variant="h6" className="user">
+            {localStorage.getItem("username")}
+          </Typography>
+          <Link
+            to="/login"
+            className="link"
+            onClick={() => this._handleLogout()}
+          >
             Logout
-          </Button>
+          </Link>
         </Toolbar>
       </AppBar>
     );

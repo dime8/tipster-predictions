@@ -22,10 +22,9 @@ const MatchesPageQuery = graphql`
 `;
 
 export default class MatchesPage extends React.Component {
-  Auth = new AuthHelperMethods();
-
-  componentDidMount() {
-    if (!this.Auth.loggedIn()) this.props.history.replace("/login");
+  constructor(props) {
+    super(props);
+    this.Auth = new AuthHelperMethods();
   }
 
   render() {
@@ -34,9 +33,7 @@ export default class MatchesPage extends React.Component {
         environment={environment}
         query={MatchesPageQuery}
         variables={{
-          id:
-            this.props.history.location.state ||
-            localStorage.getItem("currentUser")
+          id: localStorage.getItem("currentUser")
         }}
         render={({ error, props }) => {
           if (error) {
@@ -49,6 +46,7 @@ export default class MatchesPage extends React.Component {
             <Matches
               joinedMatches={props.userById.joinedMatchesByUserid.nodes}
               currentUser={localStorage.getItem("currentUser")}
+              {...this.props}
             />
           ) : null;
         }}
