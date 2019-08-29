@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import AuthHelperMethods from "../components/authentication/AuthHelperMethods";
+import AuthHelperMethods from "../utils/AuthHelperMethods";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const Auth = new AuthHelperMethods();

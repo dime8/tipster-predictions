@@ -1,5 +1,5 @@
 import decode from "jwt-decode";
-import LoginMutation from "../../mutations/LoginMutation";
+import LoginMutation from "../mutations/LoginMutation";
 import jwt from "jsonwebtoken";
 
 export default class AuthHelperMethods {

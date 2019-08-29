@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import CreatePredictionMutation from "../../mutations/CreatePredictionMutation";
 import AddDialog from "./AddDialog";
-import AuthHelperMethods from "../authentication/AuthHelperMethods";
+import AuthHelperMethods from "../../utils/AuthHelperMethods";
 
 class AddPrediction extends Component {
   constructor(props) {
@@ -23,7 +23,6 @@ class AddPrediction extends Component {
     });
   }
   render() {
-    console.log(this.props.match);
     return (
       <div>
         <AddDialog

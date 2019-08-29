@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import AuthHelperMethods from "./AuthHelperMethods";
+import AuthHelperMethods from "../../utils/AuthHelperMethods";
 import "./login.css";
 import { Link } from "react-router-dom";
 import RegisterMutation from "../../mutations/RegisterMutation";

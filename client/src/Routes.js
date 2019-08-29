@@ -7,7 +7,7 @@ import CreateMatchesPage from "./routes/CreateMatchesPage";
 import AcceptInvite from "./components/invites/AcceptInvite";
 import Login from "./components/authentication/Login";
 import Signup from "./components/authentication/Signup";
-import PrivateComponent from "./utils/PrivateComponent";
+import PrivateComponent from "./components/PrivateComponent";
 import "./App.css";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";

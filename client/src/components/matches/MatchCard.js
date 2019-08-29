@@ -11,6 +11,22 @@ import { createFragmentContainer, graphql } from "react-relay";
 import Typography from "@material-ui/core/Typography";
 
 class MatchCard extends Component {
+  renderButton(buttonName, match, handleClick) {
+    if (match.userByUserid.id === this.props.currentUser) {
+      return (
+        <Button
+          className="matchCardButtons"
+          size="small"
+          onClick={() => {
+            handleClick(match);
+          }}
+        >
+          {buttonName}
+        </Button>
+      );
+    }
+  }
+
   render() {
     const {
       match,
@@ -72,51 +88,9 @@ class MatchCard extends Component {
           >
             Add prediction
           </Button>
-          {match.userByUserid.id === this.props.currentUser ? (
-            <Button
-              className="matchCardButtons"
-              size="small"
-              onClick={() => {
-                handleClickEdit(match);
-              }}
-            >
-              Edit match
-            </Button>
-          ) : (
-            <Button className="matchCardButtons" size="small" disabled>
-              Edit match
-            </Button>
-          )}
-          {match.userByUserid.id === this.props.currentUser ? (
-            <Button
-              className="matchCardButtons"
-              size="small"
-              onClick={() => {
-                handleClickDelete(match);
-              }}
-            >
-              Delete match
-            </Button>
-          ) : (
-            <Button className="matchCardButtons" size="small" disabled>
-              Delete match
-            </Button>
-          )}
-          {match.userByUserid.id === this.props.currentUser ? (
-            <Button
-              className="matchCardButtons"
-              size="small"
-              onClick={() => {
-                handleClickInvite(match);
-              }}
-            >
-              Invite
-            </Button>
-          ) : (
-            <Button className="matchCardButtons" size="small" disabled>
-              Invite
-            </Button>
-          )}
+          {this.renderButton("Edit", match, handleClickEdit)}
+          {this.renderButton("Delete", match, handleClickDelete)}
+          {this.renderButton("Invite", match, handleClickInvite)}
         </CardActions>
       </Card>
     );

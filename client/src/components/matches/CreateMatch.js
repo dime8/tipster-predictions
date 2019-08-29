@@ -13,7 +13,7 @@ import TextField from "@material-ui/core/TextField";
 import CreateMatchMutation from "../../mutations/CreateMatchMutation";
 import UpdateMatchMutation from "../../mutations/UpdateMatchMutation";
 import JoinedMatchesMutation from "../../mutations/JoinedMatchesMutation";
-import AuthHelperMethods from "../authentication/AuthHelperMethods";
+import AuthHelperMethods from "../../utils/AuthHelperMethods";
 
 class CreateMatch extends Component {
   constructor(props) {
@@ -101,7 +101,7 @@ class CreateMatch extends Component {
               res.createMatch.matchEdge.node.id,
               res.createMatch.matchEdge.node.userid,
               res => {
-                console.log("---Match: ", res);
+                console.log("Joined match: ", res);
               }
             );
 
@@ -118,7 +118,6 @@ class CreateMatch extends Component {
   };
 
   render() {
-    console.log("Create ", this.state);
     const { teams, redirect } = this.state;
     const hosts = teams.filter(team => team.id !== this.state.guestid);
     const guests = teams.filter(team => team.id !== this.state.hostid);
