@@ -20,7 +20,6 @@ class PredictionsDialog extends React.Component {
 
   render() {
     const { handleClose, predictions } = this.props;
-    console.log("PROOO", this.props);
 
     return (
       this.isMatchDataExist() && (

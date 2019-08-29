@@ -119,7 +119,6 @@ class CreateMatch extends Component {
     const { teams, redirect } = this.state;
     const hosts = teams.filter(team => team.id !== this.state.guestid);
     const guests = teams.filter(team => team.id !== this.state.hostid);
-    console.log(this.props);
 
     return (
       <form onSubmit={this.handleSubmit}>

@@ -26,7 +26,6 @@ class AddPrediction extends Component {
     return this.props.match !== null;
   }
   render() {
-    console.log("ADDD PREDDD", this.props);
     return (
       this.isMatchDataExist() && (
         <div>

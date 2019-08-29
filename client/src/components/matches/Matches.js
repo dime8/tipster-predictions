@@ -64,12 +64,9 @@ class Matches extends Component {
           }).matchByMatchid.predictionsByMatchid.nodes
         : null;
 
-    console.log({ predictions });
-
     const { open, add } = this.state;
     const selectedMatch = this.state.match;
-    console.log(" ");
-    console.log("Match", selectedMatch);
+
     return (
       <React.Fragment>
         <div className="flexContainer">
