@@ -25,9 +25,24 @@ class PredictionCard extends Component {
       }
     );
   };
+  renderButton(buttonName, prediction, handleClick) {
+    if (prediction.userByUserid.id === this.props.currentUser) {
+      return (
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => {
+            handleClick();
+          }}
+        >
+          {buttonName}
+        </Button>
+      );
+    }
+  }
 
   render() {
-    const { prediction, currentUser } = this.props;
+    const { prediction } = this.props;
 
     return (
       <Card className="card">
@@ -44,19 +59,7 @@ class PredictionCard extends Component {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          {prediction.userByUserid.id === currentUser ? (
-            <Button
-              size="small"
-              color="primary"
-              onClick={() => this.deletePrediction()}
-            >
-              Delete predictions
-            </Button>
-          ) : (
-            <Button size="small" color="primary" disabled>
-              Delete predictions
-            </Button>
-          )}
+          {this.renderButton("Delete", prediction, this.deletePrediction)}
         </CardActions>
       </Card>
     );

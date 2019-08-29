@@ -10,7 +10,7 @@ class AddPrediction extends Component {
     this.state = {
       score: "",
       match: "",
-      userid: ""
+      userid: localStorage.getItem("currentUser")
     };
     this.Auth = new AuthHelperMethods();
   }
@@ -22,18 +22,24 @@ class AddPrediction extends Component {
       userid: user.userid
     });
   }
+  isMatchDataExist() {
+    return this.props.match !== null;
+  }
   render() {
+    console.log("ADDD PREDDD", this.props);
     return (
-      <div>
-        <AddDialog
-          name={this.state.name}
-          open={this.props.open}
-          match={this.props.match}
-          updateField={this.updateField}
-          _addPrediction={this._addPrediction}
-          handleClose={this.props.handleClose}
-        />
-      </div>
+      this.isMatchDataExist() && (
+        <div>
+          <AddDialog
+            name={this.state.name}
+            open={this.props.open}
+            match={this.props.match}
+            updateField={this.updateField}
+            _addPrediction={this._addPrediction}
+            handleClose={this.props.handleClose}
+          />
+        </div>
+      )
     );
   }
 
@@ -43,7 +49,7 @@ class AddPrediction extends Component {
 
   _addPrediction = () => {
     const { score, userid } = this.state;
-    const matchid = this.state.match.id;
+    const matchid = this.props.match.id;
     CreatePredictionMutation(score, matchid, userid, res => {
       console.log("Mutation completed!");
       alert(`Prediction added! 

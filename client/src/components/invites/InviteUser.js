@@ -7,32 +7,32 @@ class InviteUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      score: "",
       match: "",
-      userid: ""
+      userid: localStorage.getItem("currentUser")
     };
   }
-  componentDidMount() {
-    this.setState({
-      match: this.props.match
-    });
+  isMatchDataExist() {
+    return this.props.match !== null;
   }
+
   render() {
     return (
-      <div>
-        <InviteUserDialog
-          open={this.props.open}
-          match={this.props.match}
-          _inviteUser={this._inviteUser}
-          handleClose={this.props.handleClose}
-          currentUser={this.props.currentUser}
-        />
-      </div>
+      this.isMatchDataExist() && (
+        <div>
+          <InviteUserDialog
+            open={this.props.open}
+            match={this.props.match}
+            _inviteUser={this._inviteUser}
+            handleClose={this.props.handleClose}
+            currentUser={this.props.currentUser}
+          />
+        </div>
+      )
     );
   }
 
   _inviteUser = userid => {
-    const matchid = this.state.match.id;
+    const matchid = this.props.match.id;
     InviteUserMutation(userid, matchid, res => {
       console.log("Mutation completed! Response:", res);
       alert(`Invited user id :${userid}. Match id: ${matchid}.

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash ba13f3b3a32fdc27de83992cc69d6675
+ * @relayHash ffa7137f8e713f4cd8cbe84dd6370e63
  */
 
 /* eslint-disable */
@@ -54,6 +54,17 @@ fragment Matches_joinedMatches on JoinedMatch {
   matchByMatchid {
     id
     ...MatchCard_match
+    predictionsByMatchid(orderBy: USERID_ASC) {
+      nodes {
+        id
+        score
+        ...PredictionsDialog_predictions
+        userByUserid {
+          id
+          username
+        }
+      }
+    }
   }
 }
 
@@ -350,7 +361,7 @@ return {
     "operationKind": "query",
     "name": "MatchesPageQuery",
     "id": null,
-    "text": "query MatchesPageQuery(\n  $id: UUID!\n) {\n  userById(id: $id) {\n    joinedMatchesByUserid {\n      nodes {\n        matchid\n        ...Matches_joinedMatches\n        matchByMatchid {\n          id\n        }\n      }\n    }\n  }\n}\n\nfragment Matches_joinedMatches on JoinedMatch {\n  matchByMatchid {\n    id\n    ...MatchCard_match\n  }\n}\n\nfragment MatchCard_match on Match {\n  id\n  type\n  league\n  teamByHostid {\n    name\n  }\n  teamByGuestid {\n    name\n  }\n  predictionsByMatchid(orderBy: USERID_ASC) {\n    nodes {\n      id\n      score\n      ...PredictionsDialog_predictions\n      userByUserid {\n        id\n        username\n      }\n    }\n  }\n  userByUserid {\n    id\n    username\n  }\n}\n\nfragment PredictionsDialog_predictions on Prediction {\n  id\n  ...PredictionCard_prediction\n}\n\nfragment PredictionCard_prediction on Prediction {\n  id\n  matchid\n  score\n  userByUserid {\n    id\n    username\n  }\n}\n",
+    "text": "query MatchesPageQuery(\n  $id: UUID!\n) {\n  userById(id: $id) {\n    joinedMatchesByUserid {\n      nodes {\n        matchid\n        ...Matches_joinedMatches\n        matchByMatchid {\n          id\n        }\n      }\n    }\n  }\n}\n\nfragment Matches_joinedMatches on JoinedMatch {\n  matchByMatchid {\n    id\n    ...MatchCard_match\n    predictionsByMatchid(orderBy: USERID_ASC) {\n      nodes {\n        id\n        score\n        ...PredictionsDialog_predictions\n        userByUserid {\n          id\n          username\n        }\n      }\n    }\n  }\n}\n\nfragment MatchCard_match on Match {\n  id\n  type\n  league\n  teamByHostid {\n    name\n  }\n  teamByGuestid {\n    name\n  }\n  predictionsByMatchid(orderBy: USERID_ASC) {\n    nodes {\n      id\n      score\n      ...PredictionsDialog_predictions\n      userByUserid {\n        id\n        username\n      }\n    }\n  }\n  userByUserid {\n    id\n    username\n  }\n}\n\nfragment PredictionsDialog_predictions on Prediction {\n  id\n  ...PredictionCard_prediction\n}\n\nfragment PredictionCard_prediction on Prediction {\n  id\n  matchid\n  score\n  userByUserid {\n    id\n    username\n  }\n}\n",
     "metadata": {}
   }
 };

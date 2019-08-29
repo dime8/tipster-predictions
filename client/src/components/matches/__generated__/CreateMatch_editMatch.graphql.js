@@ -9,9 +9,9 @@
 /*::
 import type { ReaderFragment } from 'relay-runtime';
 import type { FragmentReference } from "relay-runtime";
-declare export opaque type CreateMatch_matches$ref: FragmentReference;
-declare export opaque type CreateMatch_matches$fragmentType: CreateMatch_matches$ref;
-export type CreateMatch_matches = $ReadOnlyArray<{|
+declare export opaque type CreateMatch_editMatch$ref: FragmentReference;
+declare export opaque type CreateMatch_editMatch$fragmentType: CreateMatch_editMatch$ref;
+export type CreateMatch_editMatch = {|
   +id: any,
   +type: string,
   +league: string,
@@ -24,12 +24,12 @@ export type CreateMatch_matches = $ReadOnlyArray<{|
     +id: any,
     +name: string,
   |},
-  +$refType: CreateMatch_matches$ref,
-|}>;
-export type CreateMatch_matches$data = CreateMatch_matches;
-export type CreateMatch_matches$key = {
-  +$data?: CreateMatch_matches$data,
-  +$fragmentRefs: CreateMatch_matches$ref,
+  +$refType: CreateMatch_editMatch$ref,
+|};
+export type CreateMatch_editMatch$data = CreateMatch_editMatch;
+export type CreateMatch_editMatch$key = {
+  +$data?: CreateMatch_editMatch$data,
+  +$fragmentRefs: CreateMatch_editMatch$ref,
 };
 */
 
@@ -54,11 +54,9 @@ v1 = [
 ];
 return {
   "kind": "Fragment",
-  "name": "CreateMatch_matches",
+  "name": "CreateMatch_editMatch",
   "type": "Match",
-  "metadata": {
-    "plural": true
-  },
+  "metadata": null,
   "argumentDefinitions": [],
   "selections": [
     (v0/*: any*/),
@@ -107,5 +105,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'cba89594cc326a7dbc05fbe578d73baf';
+(node/*: any*/).hash = '69070dc04f69c7d47001fc255d5f298b';
 module.exports = node;

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 5b33ba27f2f86e454ebc2554695c7a70
+ * @relayHash bc0ec374461c83cb7a7cd46a12fc3973
  */
 
 /* eslint-disable */
@@ -9,7 +9,6 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-type CreateMatch_matches$ref = any;
 type CreateMatch_teams$ref = any;
 export type CreateMatchesPageQueryVariables = {||};
 export type CreateMatchesPageQueryResponse = {|
@@ -17,12 +16,7 @@ export type CreateMatchesPageQueryResponse = {|
     +nodes: $ReadOnlyArray<?{|
       +$fragmentRefs: CreateMatch_teams$ref
     |}>
-  |},
-  +allMatches: ?{|
-    +nodes: $ReadOnlyArray<?{|
-      +$fragmentRefs: CreateMatch_matches$ref
-    |}>
-  |},
+  |}
 |};
 export type CreateMatchesPageQuery = {|
   variables: CreateMatchesPageQueryVariables,
@@ -38,11 +32,6 @@ query CreateMatchesPageQuery {
       ...CreateMatch_teams
     }
   }
-  allMatches {
-    nodes {
-      ...CreateMatch_matches
-    }
-  }
 }
 
 fragment CreateMatch_teams on Team {
@@ -51,57 +40,9 @@ fragment CreateMatch_teams on Team {
   league
   type
 }
-
-fragment CreateMatch_matches on Match {
-  id
-  type
-  league
-  userid
-  teamByHostid {
-    id
-    name
-  }
-  teamByGuestid {
-    id
-    name
-  }
-}
 */
 
-const node/*: ConcreteRequest*/ = (function(){
-var v0 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "id",
-  "args": null,
-  "storageKey": null
-},
-v1 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "name",
-  "args": null,
-  "storageKey": null
-},
-v2 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "league",
-  "args": null,
-  "storageKey": null
-},
-v3 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "type",
-  "args": null,
-  "storageKey": null
-},
-v4 = [
-  (v0/*: any*/),
-  (v1/*: any*/)
-];
-return {
+const node/*: ConcreteRequest*/ = {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
@@ -136,33 +77,6 @@ return {
             ]
           }
         ]
-      },
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "allMatches",
-        "storageKey": null,
-        "args": null,
-        "concreteType": "MatchesConnection",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "nodes",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "Match",
-            "plural": true,
-            "selections": [
-              {
-                "kind": "FragmentSpread",
-                "name": "CreateMatch_matches",
-                "args": null
-              }
-            ]
-          }
-        ]
       }
     ]
   },
@@ -189,61 +103,33 @@ return {
             "concreteType": "Team",
             "plural": true,
             "selections": [
-              (v0/*: any*/),
-              (v1/*: any*/),
-              (v2/*: any*/),
-              (v3/*: any*/)
-            ]
-          }
-        ]
-      },
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "allMatches",
-        "storageKey": null,
-        "args": null,
-        "concreteType": "MatchesConnection",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "nodes",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "Match",
-            "plural": true,
-            "selections": [
-              (v0/*: any*/),
-              (v3/*: any*/),
-              (v2/*: any*/),
               {
                 "kind": "ScalarField",
                 "alias": null,
-                "name": "userid",
+                "name": "id",
                 "args": null,
                 "storageKey": null
               },
               {
-                "kind": "LinkedField",
+                "kind": "ScalarField",
                 "alias": null,
-                "name": "teamByHostid",
-                "storageKey": null,
+                "name": "name",
                 "args": null,
-                "concreteType": "Team",
-                "plural": false,
-                "selections": (v4/*: any*/)
+                "storageKey": null
               },
               {
-                "kind": "LinkedField",
+                "kind": "ScalarField",
                 "alias": null,
-                "name": "teamByGuestid",
-                "storageKey": null,
+                "name": "league",
                 "args": null,
-                "concreteType": "Team",
-                "plural": false,
-                "selections": (v4/*: any*/)
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "type",
+                "args": null,
+                "storageKey": null
               }
             ]
           }
@@ -255,11 +141,10 @@ return {
     "operationKind": "query",
     "name": "CreateMatchesPageQuery",
     "id": null,
-    "text": "query CreateMatchesPageQuery {\n  allTeams {\n    nodes {\n      ...CreateMatch_teams\n    }\n  }\n  allMatches {\n    nodes {\n      ...CreateMatch_matches\n    }\n  }\n}\n\nfragment CreateMatch_teams on Team {\n  id\n  name\n  league\n  type\n}\n\nfragment CreateMatch_matches on Match {\n  id\n  type\n  league\n  userid\n  teamByHostid {\n    id\n    name\n  }\n  teamByGuestid {\n    id\n    name\n  }\n}\n",
+    "text": "query CreateMatchesPageQuery {\n  allTeams {\n    nodes {\n      ...CreateMatch_teams\n    }\n  }\n}\n\nfragment CreateMatch_teams on Team {\n  id\n  name\n  league\n  type\n}\n",
     "metadata": {}
   }
 };
-})();
 // prettier-ignore
-(node/*: any*/).hash = '789a074f875d3aaadf7079c173f864bc';
+(node/*: any*/).hash = 'c0356cde613fbb3022ce4f9146228ee0';
 module.exports = node;

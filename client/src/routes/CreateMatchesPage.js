@@ -10,21 +10,34 @@ const CreateMatchesPageQuery = graphql`
         ...CreateMatch_teams
       }
     }
-    allMatches {
+  }
+`;
+const EditMatchPageQuery = graphql`
+  query CreateMatchesPageEditQuery($id: UUID!) {
+    allTeams {
       nodes {
-        ...CreateMatch_matches
+        ...CreateMatch_teams
       }
+    }
+    matchById(id: $id) {
+      id
+      ...CreateMatch_editMatch
     }
   }
 `;
 
 export default class CreateMatchesPage extends React.Component {
   render() {
+    console.log(this.props.location);
     return (
       <QueryRenderer
         environment={environment}
-        query={CreateMatchesPageQuery}
-        variables={{}}
+        query={
+          this.props.location.pathname === "/create-match"
+            ? CreateMatchesPageQuery
+            : EditMatchPageQuery
+        }
+        variables={{ id: this.props.match.params.id }}
         render={({ error, props }) => {
           if (error) {
             return <div>Error!</div>;
@@ -35,7 +48,7 @@ export default class CreateMatchesPage extends React.Component {
           return (
             <CreateMatch
               teams={props.allTeams.nodes}
-              matches={props.allMatches.nodes}
+              editMatch={props.matchById}
               {...this.props}
             />
           );

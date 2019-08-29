@@ -6,8 +6,6 @@ import { createFragmentContainer, graphql } from "react-relay";
 
 import { withRouter } from "react-router";
 
-import { Redirect } from "react-router-dom";
-
 import TextField from "@material-ui/core/TextField";
 
 import CreateMatchMutation from "../../mutations/CreateMatchMutation";
@@ -25,7 +23,7 @@ class CreateMatch extends Component {
       guestid: "",
       userid: localStorage.getItem("currentUser"),
       teams: props.teams,
-      matches: props.matches,
+      match: props.editMatch,
       redirect: false
     };
 
@@ -33,20 +31,14 @@ class CreateMatch extends Component {
   }
 
   componentDidMount() {
-    let match = {};
     if (this.isEditMatchRoute()) {
-      match = this.state.matches.find(
-        match =>
-          match.id === this.props.match.params.id &&
-          match.userid === this.state.userid
-      );
-      if (match) {
+      if (this.state.match) {
         this.setState({
-          id: match.id,
-          type: match.type,
-          league: match.league,
-          hostid: match.teamByHostid.id,
-          guestid: match.teamByGuestid.id
+          id: this.state.match.id,
+          type: this.state.match.type,
+          league: this.state.match.league,
+          hostid: this.state.match.teamByHostid.id,
+          guestid: this.state.match.teamByGuestid.id
         });
       } else {
         this.props.history.replace({
@@ -83,8 +75,11 @@ class CreateMatch extends Component {
             console.log("Match edited!", res);
             alert(`Match edited!`);
           }
+          this.props.history.replace({
+            pathname: "/"
+          });
         }
-      ).then(() => this.setState({ redirect: true }));
+      );
     } else {
       CreateMatchMutation(
         this.state.type,
@@ -112,8 +107,11 @@ class CreateMatch extends Component {
               guestid: ""
             });
           }
+          this.props.history.replace({
+            pathname: "/"
+          });
         }
-      ).then(() => this.setState({ redirect: true }));
+      );
     }
   };
 
@@ -121,10 +119,10 @@ class CreateMatch extends Component {
     const { teams, redirect } = this.state;
     const hosts = teams.filter(team => team.id !== this.state.guestid);
     const guests = teams.filter(team => team.id !== this.state.hostid);
+    console.log(this.props);
 
     return (
       <form onSubmit={this.handleSubmit}>
-        {redirect && <Redirect to="/" />}
         <div className="container">
           <TextField
             name="type"
@@ -206,8 +204,8 @@ export default withRouter(
         type
       }
     `,
-    matches: graphql`
-      fragment CreateMatch_matches on Match @relay(plural: true) {
+    editMatch: graphql`
+      fragment CreateMatch_editMatch on Match {
         id
         type
         league

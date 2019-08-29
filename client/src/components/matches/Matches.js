@@ -57,12 +57,23 @@ class Matches extends Component {
       joinedMatch => joinedMatch.matchByMatchid
     );
 
+    const predictions =
+      this.state.match !== null
+        ? joinedMatches.find(joinedMatch => {
+            return joinedMatch.matchByMatchid.id === this.state.match.id;
+          }).matchByMatchid.predictionsByMatchid.nodes
+        : null;
+
+    console.log({ predictions });
+
     const { open, add } = this.state;
     const selectedMatch = this.state.match;
+    console.log(" ");
+    console.log("Match", selectedMatch);
     return (
       <React.Fragment>
         <div className="flexContainer">
-          {matches.length > 0 &&
+          {matches.length > 0 ? (
             matches.map(match => (
               <MatchCard
                 key={match.id}
@@ -74,43 +85,43 @@ class Matches extends Component {
                 handleClickEdit={this.handleClickEdit}
                 currentUser={this.props.currentUser}
               />
-            ))}
+            ))
+          ) : (
+            <span className="message">
+              Add your matches, or join matches from other users.
+            </span>
+          )}
         </div>
-        {selectedMatch !== null && (
-          <PredictionsDialog
-            open={open}
-            predictions={selectedMatch.predictionsByMatchid.nodes}
-            updateMatch={this.updateMatch}
-            handleClose={this.handleClose}
-            currentUser={this.props.currentUser}
-          />
-        )}
 
-        {selectedMatch !== null && (
-          <AddPrediction
-            open={add}
-            match={selectedMatch}
-            predictions={selectedMatch.predictionsByMatchid.nodes}
-            handleClose={this.handleClose}
-            currentUser={this.props.currentUser}
-          />
-        )}
-        {selectedMatch !== null && (
-          <DeleteMatch
-            open={this.state.delete}
-            match={selectedMatch}
-            handleClose={this.handleClose}
-            currentUser={this.props.currentUser}
-          />
-        )}
-        {selectedMatch !== null && (
-          <InviteUser
-            open={this.state.invite}
-            match={selectedMatch}
-            handleClose={this.handleClose}
-            currentUser={this.props.currentUser}
-          />
-        )}
+        <PredictionsDialog
+          open={open}
+          match={selectedMatch}
+          predictions={predictions}
+          handleClose={this.handleClose}
+          currentUser={this.props.currentUser}
+        />
+
+        <AddPrediction
+          open={add}
+          match={selectedMatch}
+          predictions={predictions}
+          handleClose={this.handleClose}
+          currentUser={this.props.currentUser}
+        />
+
+        <DeleteMatch
+          open={this.state.delete}
+          match={selectedMatch}
+          handleClose={this.handleClose}
+          currentUser={this.props.currentUser}
+        />
+
+        <InviteUser
+          open={this.state.invite}
+          match={selectedMatch}
+          handleClose={this.handleClose}
+          currentUser={this.props.currentUser}
+        />
       </React.Fragment>
     );
   }
@@ -126,6 +137,17 @@ export default createFragmentContainer(Matches, {
       matchByMatchid {
         id
         ...MatchCard_match
+        predictionsByMatchid(orderBy: USERID_ASC) {
+          nodes {
+            id
+            score
+            ...PredictionsDialog_predictions
+            userByUserid {
+              id
+              username
+            }
+          }
+        }
       }
     }
   `

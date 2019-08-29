@@ -14,42 +14,47 @@ class PredictionsDialog extends React.Component {
     super();
     this.state = { predictions: props.predictions };
   }
+  isMatchDataExist() {
+    return this.props.match !== null;
+  }
 
   render() {
     const { handleClose, predictions } = this.props;
+    console.log("PROOO", this.props);
 
     return (
-      <div>
-        <Dialog
-          open={this.props.open}
-          onClose={handleClose}
-          scroll="paper"
-          aria-labelledby="scroll-dialog-title"
-        >
-          <DialogTitle id="scroll-dialog-title">Predictions</DialogTitle>
-          <DialogContent className="Content">
-            {Object.keys(predictions).length !== 0 ? (
-              predictions.map(prediction => (
-                <PredictionCard
-                  key={prediction.id}
-                  prediction={prediction}
-                  updateMatch={this.props.updateMatch}
-                  currentUser={this.props.currentUser}
-                />
-              ))
-            ) : (
-              <span className="predictionUser">
-                There are no predictions for this match!
-              </span>
-            )}
-          </DialogContent>
-          <DialogActions className="Actions">
-            <Button onClick={() => handleClose()} /* color="primary"*/>
-              Close
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
+      this.isMatchDataExist() && (
+        <div>
+          <Dialog
+            open={this.props.open}
+            onClose={handleClose}
+            scroll="paper"
+            aria-labelledby="scroll-dialog-title"
+          >
+            <DialogTitle id="scroll-dialog-title">Predictions</DialogTitle>
+            <DialogContent className="Content">
+              {Object.keys(predictions).length !== 0 ? (
+                predictions.map(prediction => (
+                  <PredictionCard
+                    key={prediction.id}
+                    prediction={prediction}
+                    currentUser={this.props.currentUser}
+                  />
+                ))
+              ) : (
+                <span className="predictionUser">
+                  There are no predictions for this match!
+                </span>
+              )}
+            </DialogContent>
+            <DialogActions className="Actions">
+              <Button onClick={() => handleClose()} /* color="primary"*/>
+                Close
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </div>
+      )
     );
   }
 }

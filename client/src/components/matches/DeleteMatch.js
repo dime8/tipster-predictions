@@ -9,35 +9,35 @@ class DeleteMatch extends Component {
     this.state = {
       score: "",
       match: "",
-      userid: ""
+      userid: localStorage.getItem("currentUser")
     };
   }
-  componentDidMount() {
-    this.setState({
-      match: this.props.match,
-      userid: this.props.match.userByUserid.id
-    });
+
+  isMatchDataExist() {
+    return this.props.match !== null;
   }
   render() {
     return (
-      <div>
-        <DeleteDialog
-          open={this.props.open}
-          match={this.props.match}
-          _deleteMatch={this._deleteMatch}
-          handleClose={this.props.handleClose}
-        />
-      </div>
+      this.isMatchDataExist() && (
+        <div>
+          <DeleteDialog
+            open={this.props.open}
+            match={this.props.match}
+            _deleteMatch={this._deleteMatch}
+            handleClose={this.props.handleClose}
+          />
+        </div>
+      )
     );
   }
 
   _deleteMatch = () => {
-    const { userid } = this.state;
-    const matchid = this.state.match.id;
+    this.props.handleClose();
+    const userid = this.state.userid;
+    const matchid = this.props.match.id;
     DeleteMatchMutation(matchid, userid, res => {
       console.log("Mutation completed!");
       alert(`Match ${matchid} delited!`);
-      this.props.handleClose();
     });
   };
 }
