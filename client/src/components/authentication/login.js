@@ -23,6 +23,7 @@ class Login extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
+    logAndTrackError(new Error('Sentry err'))
   };
 
   handleFormSubmit = e => {
@@ -42,7 +43,7 @@ class Login extends Component {
         });
       })
       .catch(err => {
-        logAndTrackError(new Error('Sentry err'))
+
         alert(err);
       });
   };
