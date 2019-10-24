@@ -7,7 +7,7 @@ import * as Sentry from '@sentry/browser'
 Sentry.init({
     dsn: "https://ecbd9b4d85b4493480ab3a15294816b4@sentry.io/1793554",
     environment: 'development',
-    release: '19fcb6f576cec6604ad25cf0699d2b41ee40be64'
+    release: '1.0.0'
 })
 
 ReactDOM.render(<App />, document.getElementById("root"));
