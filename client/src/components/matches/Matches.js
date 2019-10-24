@@ -7,6 +7,8 @@ import AddPrediction from "../predictions/AddPrediction";
 import DeleteMatch from "../matches/DeleteMatch";
 
 import { createFragmentContainer, graphql } from "react-relay";
+import { logAndTrackError } from '../../utils/log'
+
 
 class Matches extends Component {
   state = {
@@ -19,6 +21,7 @@ class Matches extends Component {
   };
 
   handleClickOpen = match => {
+    logAndTrackError(new Error('error'))
     this.setState({ open: true, match });
   };
 
@@ -60,8 +63,8 @@ class Matches extends Component {
     const predictions =
       this.state.match !== null
         ? joinedMatches.find(joinedMatch => {
-            return joinedMatch.matchByMatchid.id === this.state.match.id;
-          }).matchByMatchid.predictionsByMatchid.nodes
+          return joinedMatch.matchByMatchid.id === this.state.match.id;
+        }).matchByMatchid.predictionsByMatchid.nodes
         : null;
 
     const { open, add } = this.state;
@@ -84,10 +87,10 @@ class Matches extends Component {
               />
             ))
           ) : (
-            <span className="message">
-              Add your matches, or join matches from other users.
+              <span className="message">
+                Add your matches, or join matches from other users.
             </span>
-          )}
+            )}
         </div>
 
         <PredictionsDialog

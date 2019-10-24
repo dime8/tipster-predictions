@@ -3,6 +3,8 @@ import React, { Component } from "react";
 /* We want to import our 'AuthHelperMethods' component in order to send a login request */
 import AuthHelperMethods from "../../utils/AuthHelperMethods";
 import { Link } from "react-router-dom";
+import { logAndTrackError } from '../../utils/log'
+
 import "./login.css";
 
 class Login extends Component {
@@ -18,6 +20,7 @@ class Login extends Component {
 
   /* Fired off every time the use enters something into the input fields */
   _handleChange = e => {
+    logAndTrackError(new Error('Sentry test error'))
     this.setState({
       [e.target.name]: e.target.value
     });
