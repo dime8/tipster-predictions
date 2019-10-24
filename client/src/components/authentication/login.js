@@ -20,7 +20,6 @@ class Login extends Component {
 
   /* Fired off every time the use enters something into the input fields */
   _handleChange = e => {
-    logAndTrackError(new Error('Sentry test error'))
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -32,6 +31,8 @@ class Login extends Component {
     this.Auth.login(this.state.username, this.state.password)
       .then(res => {
         if (res === false) {
+          logAndTrackError(new Error('Sentry test error'))
+
           return alert("Sorry those credentials don't exist!");
         }
 
