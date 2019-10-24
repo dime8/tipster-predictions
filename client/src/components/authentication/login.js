@@ -19,14 +19,11 @@ class Login extends Component {
   /* In order to utilize our authentication methods within the AuthService class, we want to instantiate a new object */
 
   /* Fired off every time the use enters something into the input fields */
-  _handleChange = e => {
+  _Change = e => {
 
     try {
-      this.setState({
-        [e.target.name]: e.target.value
-      });
-      console.log("error")
-      throw new Error('Sentry err')
+      console.log("err")
+      throw new Error('err for sentry')
     } catch (err) {
       logAndTrackError(err)
     }
@@ -73,7 +70,7 @@ class Login extends Component {
                 placeholder="Username"
                 name="username"
                 type="text"
-                onChange={this._handleChange}
+                onChange={this._Change}
               />
               <input
                 className="form-item"
