@@ -20,10 +20,16 @@ class Login extends Component {
 
   /* Fired off every time the use enters something into the input fields */
   _handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-    logAndTrackError(new Error('Sentry err'))
+
+    try {
+      this.setState({
+        [e.target.name]: e.target.value
+      });
+      console.log("error")
+      throw new Error('Sentry err')
+    } catch (err) {
+      logAndTrackError(err)
+    }
   };
 
   handleFormSubmit = e => {
